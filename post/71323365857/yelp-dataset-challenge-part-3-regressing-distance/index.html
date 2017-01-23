@@ -1,0 +1,163 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>All code for this post is open source and is available on <a href="https://github.com/rjurney/yelp_challenge">github</a>. I was recently introduced to <a href="http://leafletjs.com">leaflet.js</a>, a javascript map library that is <a href="http://leafletjs.com/examples/quick-start.html">very easy to use</a>.
+
+</p><center><img src="https://68.media.tumblr.com/27a3d8466399fa23ed015e27aaee34dc/tumblr_inline_myh5bfvnxu1qdyhha.png"/></center>
+
+I’m using leaflet.js as part of my entry to the <a href="http://www.yelp.com/dataset_challenge/">Yelp Dataset Challenge</a> - at the ‘reporting’ level of the data-value pyramid: to link business records together with relevant nearby businesses. The data in the challenge includes business data, that includes latitude/longitude data.
+
+<center><img src="https://68.media.tumblr.com/e65a0cee420afd03b8f004c12725fe69/tumblr_inline_myh5jkUyaC1qdyhha.png"/></center>
+
+<br/>
+The business data looks like this:
+
+<pre><code>{
+    'type': 'business',
+    'business_id': (encrypted business id),
+    'name': (business name),
+    'neighborhoods': [(hood names)],
+    'full_address': (localized address),
+    'city': (city),
+    'state': (state),
+    'latitude': latitude,
+    'longitude': longitude,
+    'stars': (star rating, rounded to half-stars),
+    'review_count': review count,
+    'categories': [(localized category names)]
+    'open': True / False (corresponds to closed, not business hours),
+}</code></pre>
+
+Using this data, I computed the distance between all businesses of the same category in the dataset in Pig, like so:
+
+<pre><code>location_comparisons = JOIN locations BY category, locations_2 BY category USING 'replicated';                                                        
+distances = FOREACH location_comparisons GENERATE flat_locations::business_id AS business_id_1,
+                    locations_2::business_id AS business_id_2,
+                    flat_locations::category AS category,
+                    udfs.haversine(flat_locations::longitude,
+                                   flat_locations::latitude,
+                                   locations_2::longitude,
+                                   locations_2::latitude) AS distance;</code></pre>
+
+The haversine distance UDF looks like this (it uses <a href="http://pig.apache.org/docs/r0.12.0/udf.html#python-udfs">CPython UDFs</a>, available in <a href="http://pig.apache.org/docs/r0.12.0/">Pig 0.12</a>):
+
+<pre><code>@outputSchema("distance:double")
+def haversine(lon1, lat1, lon2, lat2):
+    """
+    Calculate the great circle distance between two points
+    on the earth (specified in decimal degrees)
+    """
+    # convert decimal degrees to radians
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+    # haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a))
+    km = 6367 * c
+    return km</code></pre>
+
+The results were grouped into the top ten nearest businesses and published to MongoDB:
+
+<pre><code>nearest_businesses = FOREACH (GROUP with_coords BY business_1) {
+    sorted = ORDER with_coords BY distance;
+    top_10 = LIMIT sorted 10;
+    GENERATE group AS business_id, 
+             (float)(2.0 * MAX(top_10.distance)) AS range:float, 
+             top_10.(business_2, name, latitude, longitude) AS nearest_businesses;
+}
+STORE nearest_businesses INTO 'mongodb://localhost/yelp.nearest_businesses' USING MongoStorage();</code></pre>
+
+These results are then served by a Python/Flask application using Bootstrap. Upon computing the top-ten nearest, relevant businesses, I was presented with the problem of figuring out the correct level of zoom to show all ten businesses. Initially I tried a simple linear mapping from one scale to another, but I could not make the zoom fit the data consistently. In about half of cases, the top 10 businesses would either be zoomed too far out, or zoomed in too far to show all ten businesses. The initial attempt at mapping looked like this:
+
+<pre><code>def map_degree_to_zoom(degree_value):
+    # Determined by experimentation with Leaflet UI and MAX() of distances in Pig
+    range_min = 0
+    range_max = 142
+    zoom_min = 7
+    zoom_max = 12
+    
+    # Compute ranges
+    range_span = range_max - range_min
+    zoom_span = zoom_max - zoom_min
+    
+    # Convert the left range into a 0-1 range (float)
+    value_scaled = float(degree_value - range_min) / float(range_span)
+    
+    # Convert the 0-1 range into a value in the right range.
+    return int(zoom_max - (value_scaled * zoom_span))</code></pre> 
+
+So I gathered data and turned to visualization. I collected data manually, by logging the maximum distance of the ten-nearest businesses against the minimum zoom level required to visualize them all at once. The data looks like this:
+
+<br/><br/><center>
+<table style="text-align: center; float:center; border=" cellspacing="10"><tr><td>1.26710856</td><td style="padding-left: 10px;">15</td></tr><tr><td>0.418455511</td><td style="padding-left: 10px;">16</td></tr><tr><td>4.176179886</td><td style="padding-left: 10px;">13</td></tr><tr><td>4.059176445</td><td style="padding-left: 10px;">13</td></tr><tr><td>2.985990286</td><td style="padding-left: 10px;">13</td></tr><tr><td>4.584879398</td><td style="padding-left: 10px;">13</td></tr><tr><td>0.341496378</td><td style="padding-left: 10px;">16</td></tr><tr><td>0.633716404</td><td style="padding-left: 10px;">16</td></tr><tr><td>3.525056601</td><td style="padding-left: 10px;">13</td></tr><tr><td>4.084414959</td><td style="padding-left: 10px;">13</td></tr><tr><td>0.713507891</td><td style="padding-left: 10px;">15</td></tr><tr><td>15.74468708</td><td style="padding-left: 10px;">11</td></tr><tr><td>6.349864006</td><td style="padding-left: 10px;">12</td></tr><tr><td>5.078705788</td><td style="padding-left: 10px;">12</td></tr><tr><td>6.349864006</td><td style="padding-left: 10px;">12</td></tr><tr><td>9.700486183</td><td style="padding-left: 10px;">12</td></tr><tr><td>25.13388824</td><td style="padding-left: 10px;">11</td></tr><tr><td>13.71557617</td><td style="padding-left: 10px;">11</td></tr><tr><td>0.065407977</td><td style="padding-left: 10px;">18</td></tr><tr><td>11.24457836</td><td style="padding-left: 10px;">11</td></tr><tr><td>12.29977512</td><td style="padding-left: 10px;">11</td></tr><tr><td>20.05439949</td><td style="padding-left: 10px;">11</td></tr></table></center>
+
+The scatterplot looks like so:
+
+<img src="https://68.media.tumblr.com/6d9ca1fba3d746bdb73d11594ed65d29/tumblr_inline_myh7jyzjnL1qdyhha.png"/>
+
+The data correlation is strongly negative:
+
+<pre><code>from scipy import stats
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import curve_fit
+from math import log
+# Build X/Y arrays from file 1
+f = open('yelp_zoom_2.csv')
+lines = f.readlines()
+x = []
+y = []
+for line in lines:
+    line = line.replace("\n", "")
+    vals = line.split(",")
+    x.append(float(vals[0]))
+    y.append(float(vals[1]))
+x = np.array(x)
+y = np.array(y)
+
+plt.plot(x, y, 'ro',label="Original Data")
+np.corrcoef(x,y) #-0.78</code></pre>
+
+A straight line is not a good fit, so I tried a log regression:
+
+<pre><code>def func(x, a, b):
+    y = a*(-np.log(x)) + b
+    return y
+
+popt, pcov = curve_fit(func, x, y)
+print "a = %s , b = %s" % (popt[0], popt[1])
+
+# Trying to plot without using linspace will result in a chaotic, pissy plot that will confuse you.
+# numpy.linspace simply creates a series of evenly spaced X values to plot a continiuous function.
+test_x = np.linspace(0,30,50)
+plt.plot(test_x, func(test_x, *popt), label="Fitted Curve")</code></pre>
+
+Which looks like a reasonable fit (note: you can easily do this in Excel):
+
+<img src="https://68.media.tumblr.com/fad250b4ab19e727e14892e68c4f46d7/tumblr_inline_myh7tlXRkJ1qdyhha.png"/>
+
+The benefit of doing this regression in Python and not Excel, is that I can now include the prediction in my web application like so:
+
+<pre><code># Apply result of regression
+def map_km_to_zoom(km, a, b):
+    y = a*(-np.log(km)) + b
+    return y
+
+# Controller: Fetch a business and display it
+@app.route("/business/<business_id>")
+def business(business_id):
+    business = businesses.find_one({'business_id': business_id})
+    nearby = nearest_businesses.find_one({'business_id': business_id})
+    zoom_level = map_km_to_zoom(nearby['range'], 1.32809669067, 14.7211913904)
+    return render_template('partials/business.html', business=business, zoom_level=zoom_level)</business_id></code></pre>
+
+This results in a clean mapping of distance in kilometers to the correct zoom level for leaflet.js.
+</body>
+</html>

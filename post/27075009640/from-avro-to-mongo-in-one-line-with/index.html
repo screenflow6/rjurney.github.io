@@ -1,0 +1,59 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+Send avros to MongoDB in one line with Pig parameter substitution:
+
+<pre>[bash]$ pig -param avros='/tmp/my_avros/' \
+-param mongourl='mongodb://localhost/me.my_collection' avro_to_mongo.pig
+
+...
+
+2012-07-12 14:19:49,014 [main] INFO  com.mongodb.hadoop.pig.MongoStorage - Store Location Config: Configuration: core-default.xml, core-site.xml, mapred-default.xml, mapred-site.xml For URI: mongodb://localhost/me.my_collection
+2012-07-12 14:19:49,014 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - <b>Success!</b>
+</pre>
+
+Source code to avro_to_mongo.pig:
+
+<pre>/* Load Avro jars and define shortcut */
+register /me/pig/build/ivy/lib/Pig/avro-1.5.3.jar
+register /me/pig/build/ivy/lib/Pig/json-simple-1.1.jar
+register /me/pig/build/ivy/lib/Pig/joda-time-1.6.jar
+define AvroStorage org.apache.pig.piggybank.storage.avro.AvroStorage();
+
+/* MongoDB */
+register /me/mongo-hadoop/mongo-2.7.3.jar
+register /me/mongo-hadoop/core/target/mongo-hadoop-core-1.0.0.jar
+register /me/mongo-hadoop/pig/target/mongo-hadoop-pig-1.0.0.jar
+set mapred.map.tasks.speculative.execution false
+set mapred.reduce.tasks.speculative.execution false
+define MongoStorage com.mongodb.hadoop.pig.MongoStorage();
+
+/* Piggybank */
+register /me/pig/contrib/piggybank/java/piggybank.jar
+
+set default_parallel 5
+
+avros = load '$avros' using AvroStorage();
+store avros into '$mongourl' using MongoStorage();</pre>
+
+Test out our new collection in MongoDB:
+
+<pre>[bash]$ mongo me --eval 'printjson(db.my_collection.findOne())'</pre>
+
+<pre>{
+	"_id" : ObjectId("4fff3f70036418714387de3e"),
+	"field1" : "foobar",
+	"bozos" : [
+		{
+			"bozo" : "russell.jurney@gmail.com"
+		}
+	]
+}</pre>
+</body>
+</html>

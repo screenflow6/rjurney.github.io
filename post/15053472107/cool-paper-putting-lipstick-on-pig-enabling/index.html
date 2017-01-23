@@ -1,0 +1,27 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p><a href="https://twitter.com/#!/arnabdotorg">@arnabotorg</a> tweeted an interesting paper called &rsquo;<a href="http://vldb.org/pvldb/vol5/p346_yaelamsterdamer_vldb2012.pdf">Putting Lipstick on Pig: Enabling Database-style Workﬂow Provenance</a>.&rsquo;<br/><br/>
+
+What the heck is workflow provenance?<br/><br/>
+
+It seems that visual programming (sort of like <a href="http://research.yahoo.com/files/paper_5.pdf">PigPen</a>) has become popular for scientific workflows: 
+
+</p><ul><li><a href="http://www.taverna.org.uk/">Tavera</a></li>
+<li><a href="https://kepler-project.org/users/sample-workflows">Kepler</a></li>
+<li><a href="http://www.vistrails.org/index.php/Main_Page">VisTrails</a></li>
+</ul><br/><br/>
+
+And while results are logged, there is no standard way to log how results were arrived at:<br/><br/><bq>&ldquo;<a href="http://sites.computer.org/debull/A07dec/susan.pdf">A given workﬂow may be executed multiple times in the context of a single project, generating a large amount of ﬁnal and intermediate data products of interest to the user [9]. When such analyses are carried out by hand or automated using general-purpose scripting languages, the means by which results are produced are typically not recorded automatically, and often not even recorded manually.</a>&rdquo;</bq><br/><br/>
+
+Lipstick uses Pig Latin to provide a SQLish provenance record:<br/><br/><bq>&ldquo;We present a novel provenance framework that marries database-style and workﬂow-style provenance, by using Pig Latin to expose the functionality of modules, thus capturing internal state and ﬁne-grained dependencies.&rdquo;</bq><br/><br/>
+
+Very cool.  Data-workflows are increasingly important in many areas, and Pig Latin is positioned to become the duct-tape for all of them.
+</body>
+</html>

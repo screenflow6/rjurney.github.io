@@ -1,0 +1,55 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<h3>Introduction</h3>
+
+<p>In our last three posts, we covered <a href="http://datasyndrome.com/post/51657080886/downloading-and-processing-the-github-data">Downloading and Processing the Github Archive</a>, <a href="http://datasyndrome.com/post/51755735612/github-archives-18-event-types">Github&rsquo;s 18 event types</a> and <a href="http://datasyndrome.com/post/51820658863/an-implied-rating-system-from-the-github-archive">creating an implied rating system</a>.</p>
+
+<p>In this post we will be measuring the distance between github projects (items) using the <a href="http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">Pearson product-moment correlation coefficient</a> using Pig and Jython.</p>
+
+<h3>Loading the Data</h3>
+
+<p>We addressed loading the data in our last post. Briefly, this code loads select Github Archive events in the form of ratings:</p>
+
+<div class="gist"><a href="https://gist.github.com/rjurney/5700101">https://gist.github.com/rjurney/5700101</a></div>
+
+<h3>Calculating Pearson&rsquo;s</h3>
+
+<p>Once the ratings are loaded, we need to make the links bidirectional, to increase their density and to make links between projects flow both-ways. Next, we need to filter out the top-most cross-linked projects, as they are not relevant and make the next step never finish. Next, we emit all co-ratings per project. This means we emit a project pair and ratings, each time a user has rated two projects. This is the meat of our recommendation data. Finally, we take a Pearson&rsquo;s distance between all projects with co-ratings.
+
+</p><div class="gist"><a href="https://gist.github.com/rjurney/5700143">https://gist.github.com/rjurney/5700143</a></div>
+
+The Pearson&rsquo;s correlation coefficient tells us how similar different projects are, based on their ratings. This data can be used to drive recommendations, which we&rsquo;ll look at tomorrow. For now, a sample of the Pearon&rsquo;s scores look like this:
+
+<pre><code>apache/pig      apache/avro     0.6914285714285715
+apache/pig      apache/bval     1.0
+apache/pig      apache/gora     1.0
+apache/pig      apache/hive     0.6410256410256406
+apache/pig      apache/isis     1.0
+apache/pig      apache/jena     1.0
+apache/pig      apache/lucy     1.0
+apache/pig      apache/mina     1.0
+apache/pig      apache/oodt     1.0
+apache/pig      apache/qpid     1.0
+apache/pig      apache/rave     1.0
+apache/pig      apache/solr     1.0
+apache/pig      apache/tika     1.0
+apache/pig      apache/wink     1.0
+apache/pig      enyojs/enyo     1.0
+apache/pig      rails/rails     0.9486832980505138
+apache/pig      scala/scala     1.0
+apache/pig      zohmg/zohmg     1.0
+apache/pig      andrew/split    0.8485281374238569
+apache/pig      apache/camel    1.0
+apache/pig      apache/derby    1.0
+apache/pig      apache/flume    0.7352941176470589
+apache/pig      apache/hbase    0.644736842105263
+apache/pig      apache/httpd    0.7352941176470589</code></pre>
+</body>
+</html>

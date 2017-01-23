@@ -1,0 +1,280 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>Complete working code for this example is available at <a href="https://github.com/rjurney/Booting-the-Analytics-Application">https://github.com/rjurney/Booting-the-Analytics-Application</a></p>
+
+<p>The first step to building analytics applications with Hadoop is to plumb your application from end to end: from collecting raw data to displaying something on the users&rsquo; screen.  This is important, because models can get complex fast, and you need user feedback plugged into the equation from the start.</p>
+
+<p>Collecting data in Avro is convenient, because a simple JSON schema is included with each pile of records.  <a href="http://avro.apache.org/">Apache Avro</a> is a data serialization system with rich formats, simple integration with dynamic languages and support in Apache Pig.</p>
+
+<p>Using Avro with Ruby and Pig is easy:</p>
+
+<p>Install the avro ruby gem.  Works in <a href="http://jruby.org/">JRuby</a> too.</p>
+<pre><code>gem install avro</code></pre>
+
+<p>Get and build Pig 0.9.1 and then piggybank (takes a while)</p>
+<pre><code>cd
+wget <a href="http://mirror.olnevhost.net/pub/apache//pig/pig-0.9.1/pig-0.9.1.tar.gz">http://mirror.olnevhost.net/pub/apache//pig/pig-0.9.1/pig-0.9.1.tar.gz</a>
+tar -xvzf pig-0.9.1.tar.gz
+cd pig-0.9.1
+ant
+cd contrib/piggybank/java
+ant
+cd ../../..</code></pre>
+
+<p>Decide on a schema for your records and create some avro records in your application.</p>
+<pre><code>require 'rubygems'
+require 'avro'
+
+
+SCHEMA = &lt;&lt;-JSON
+{ "type": "record",
+  "name": "Email",
+  "fields" : [
+    {"name": "message_id", "type": "int"},
+    {"name": "topic", "type": "string"},
+    {"name": "user_id", "type": "int"}
+  ]}
+JSON
+
+
+file = File.open('~/tmp/messages.avro', 'wb')
+schema = Avro::Schema.parse(SCHEMA)
+writer = Avro::IO::DatumWriter.new(schema)
+dw = Avro::DataFile::Writer.new(file, writer, schema)
+dw &lt;&lt; {"message_id" =&gt; 11, "topic" =&gt; "Hello World", "user_id" =&gt; 1}
+dw &lt;&lt; {"message_id" =&gt; 12, "topic" =&gt; "Jim is silly!", "user_id" =&gt; 1}
+dw &lt;&lt; {"message_id" =&gt; 13, "topic" =&gt; "I like apples.", "user_id" =&gt; 2}
+dw &lt;&lt; {"message_id" =&gt; 24, "topic" =&gt; "Round the world...", "user_id" =&gt; 2}
+dw &lt;&lt; {"message_id" =&gt; 35, "topic" =&gt; "How do I sent a message?", "user_id" =&gt; 45}
+dw.close
+</code></pre> 
+
+<p>To setup your environment, add these lines to .bash_profile:</p>
+<pre><code>pig_version=0.9.1
+export CLASSPATH=$CLASSPATH:~/pig-${pig_version}/build/ivy/lib/Pig/avro-1.4.1.jar\
+:~/pig-${pig_version}/build/ivy/lib/Pig/json-simple-1.1.jar\
+:~/pig-${pig_version}/contrib/piggybank/java/piggybank.jar\
+:~/pig-${pig_version}/build/ivy/lib/Pig/jackson-core-asl-1.6.0.jar\
+:~/pig-${pig_version}/build/ivy/lib/Pig/jackson-mapper-asl-1.6.0.jar
+</code></pre>
+And re-run it via:
+<pre><code>source ~/.bash_profile</code></pre>
+
+<p>This script via &lsquo;bin/pig -l /tmp -x local&rsquo; will get you working with your records:</p>
+<pre><code>REGISTER ./build/ivy/lib/Pig/avro-1.4.1.jar
+REGISTER ./build/ivy/lib/Pig/json-simple-1.1.jar
+REGISTER  contrib/piggybank/java/piggybank.jar
+REGISTER ./build/ivy/lib/Pig/jackson-core-asl-1.6.0.jar
+REGISTER ./build/ivy/lib/Pig/jackson-mapper-asl-1.6.0.jar
+
+
+DEFINE AvroStorage org.apache.pig.piggybank.storage.avro.AvroStorage();
+
+
+messages = LOAD '/tmp/messages.avro' USING AvroStorage();
+</code></pre>
+
+<p><a href="http://pig.apache.org/docs/r0.7.0/piglatin_ref2.html#DESCRIBE">DESCRIBE</a> lists the schema of your data - if it is known.  When you&rsquo;re winging it, sometimes you might not have a schema.  Remember: 'Pigs eat anything,&rsquo; so no schema required!  In practice, you&rsquo;ll usually want schemas for application development.</p>
+
+<pre><code>grunt&gt; DESCRIBE messages
+
+avros: {message_id: int,topic: chararray}
+
+</code></pre>
+
+<a href="http://pig.apache.org/docs/r0.7.0/piglatin_ref2.html#DUMP">DUMP</a> is simple, but be careful: 'big data&rsquo; across your screen is not always useful, and you&rsquo;ll have to ctrl-c to stop it, which ends your grunt session.
+
+<pre><code>grunt&gt; DUMP messages
+(11,Hello World,1)
+(12,Jim is silly!,1)
+(13,I like apples.,2)
+(24,Round the world...,2)
+(35,How do I sent a message?,45)
+</code></pre>
+
+In practice, you&rsquo;ll often want to <a href="http://pig.apache.org/docs/r0.7.0/piglatin_ref2.html#SAMPLE">SAMPLE</a>/<a href="http://pig.apache.org/docs/r0.7.0/piglatin_ref2.html#LIMIT">LIMIT</a>/DUMP
+
+<pre><code>grunt&gt; A = SAMPLE messages 0.5;
+grunt&gt; B = LIMIT messages 2;
+grunt&gt; DUMP B
+(11,Hello World,1)
+(12,Jim is silly!,1)
+
+</code></pre>
+
+<p>Or better yet&hellip; <a href="http://pig.apache.org/docs/r0.7.0/piglatin_ref2.html#ILLUSTRATE">ILLUSTRATE</a>!  <b>I &lt;3 ILLUSTRATE.</b></p>
+
+<pre><code>
+grunt&gt; ILLUSTRATE messages
+-----------------------------------------------------
+| avros     | message_id:int   | topic:chararray    | 
+-----------------------------------------------------
+|           | 12               | Jim is silly!     | 
+-----------------------------------------------------
+
+</code></pre>
+
+<p>ILLUSTRATE is useful because it generates sample data for your pig script immediately, without waiting on a hadoop batch job.  Debugging code while waiting minutes or hours on Hadoop jobs during test runs will tank productivity fast.  ILLUSTRATE&rsquo;s sample data &rsquo;<a href="http://infolab.stanford.edu/~olston/publications/sigmod09.pdf">illustrates the semantics of the operators while keeping the example data small.</a>&rsquo;   This makes Pig very powerful.</p>
+
+<p>Lets try some Pig operations on our data, to see what I&rsquo;m talking about.  Suppose we want to look at messages per user, but only active users&hellip; say those that have posted more than one message:</p>
+
+<pre><code>
+grunt&gt; user_groups = GROUP messages by user_id;
+grunt&gt; per_user = FOREACH user_groups GENERATE group AS user_id, 
+       SIZE($1) AS message_count;
+grunt&gt; gt_one = FILTER per_user BY message_count &gt; 1;
+grunt&gt; active_users = FOREACH gt_one GENERATE user_id;
+
+grunt&gt; DESCRIBE active_users
+active_users: {user_id: int}
+</code></pre>
+
+Now lets employ ILLUSTRATE to see what happened as records flowed through our simple data pipeline:
+
+<pre><code>grunt&gt; ILLUSTRATE active_users
+-----------------------------------------------------------------------------
+| messages     | message_id:int     | topic:chararray     | user_id:int     | 
+-----------------------------------------------------------------------------
+|              | 24                 | Round the world...  | 2               | 
+|              | 13                 | I like apples.      | 2               | 
+-----------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+| user_groups     | group:int     | messages:bag{:tuple(message_id:int,topic:chararray,user_id:int)}                     | 
+--------------------------------------------------------------------------------------------------------------------------
+|                 | 2             | {(24, Round the world..., 2), (13, I like apples., 2)}                               | 
+--------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------
+| per_user     | user_id:int     | message_count:long     | 
+-----------------------------------------------------------
+|              | 2               | 2                      | 
+-----------------------------------------------------------
+---------------------------------------------------------
+| gt_one     | user_id:int     | message_count:long     | 
+---------------------------------------------------------
+|            | 2               | 2                      | 
+---------------------------------------------------------
+--------------------------------------
+| active_users     | user_id:int     | 
+--------------------------------------
+|                  | 2               | 
+--------------------------------------
+</code></pre>
+
+<p>Note how we can see the changes happening to the data as it flows through our pig script, without waiting on Hadoop to execute it.  Note also, that the answer ILLUSTRATE gives is not definitive, but is there to guide us as we write code: our DUMP has two records in <i>active_users</i>, not one.</p>
+
+<pre><code>grunt&gt; DUMP active_users
+(1)
+(2)
+</code></pre>
+
+<p>Now lets try creating something we&rsquo;d like to actually consume in a web app, via a key/value store.  Say we want to access all messages per user, sorted newest to oldest.  Lets create a suitable key and create these records:</p>
+
+<pre><code>grunt&gt; user_groups = GROUP messages by user_id;
+per_user = FOREACH user_groups {                
+    sorted = ORDER messages BY message_id DESC;     
+    GENERATE CONCAT('messages_per_user_id:', (chararray)group) AS user_key, sorted.$0 AS messages;
+}
+grunt&gt; DESCRIBE per_user
+per_user: {user_key: chararray,messages: {(message_id: int)}}
+</code></pre>
+
+<p><b>Note: There was a six hour detour at this point to fix a bug in the AvroStorage UDF for persisting these kinds of records.  JIRA created and patch submitted here: <a href="https://issues.apache.org/jira/browse/PIG-2411">https://issues.apache.org/jira/browse/PIG-2411</a></b>.  This kind of detour is common when you first setup an app, and you just have to bare the Java and fight through it.</p>
+
+<pre><code>grunt&gt; STORE per_user INTO '/tmp/per_user.avro' USING AvroStorage();
+</code></pre>
+
+It works!
+
+Note how ILLUSTRATE has become more useful, as it displays the result of our casting the user_id from integer to chararray, and concatenating it with a record identifier to create a voldemort key that allows sharing the store with other record types:
+
+<pre><code>ILLUSTRATE per_user
+
+...
+
+--------------------------------------------------------------------------------------------------------------------------------
+| per_user     | user_key:chararray     | messages:bag{:tuple(message_id:int,topic:chararray,user_id:int)}                     | 
+--------------------------------------------------------------------------------------------------------------------------------
+|              | messages_per_user_id:1 | {(12, Jim is silly!, 1), (11, Hello World, 1)}                                       | 
+--------------------------------------------------------------------------------------------------------------------------------</code></pre>
+
+<p>This works for EvalFunc UDFs (User Defined Functions) too, which is really helpful.</p>
+
+<p>Our processed data is ready to go.  How do we publish it to a key/value store for consumption?</p>
+
+<p>With a few records, we care about ease of use.  As our data grows, we care about scaling.  <a href="http://project-voldemort.com/">Project Voldemort</a> is distributed key/value storage system which is easy to use and which scales well too.  Voldemort <a href="http://sna-projects.com/blog/2009/06/voldemort-and-hadoop/">supports building read-only stores on Hadoop and loading them directly</a> from the hadoop cluster to the voldemort cluster.</p>
+
+<p>Initially, we will write individual records to a Voldemort BDB store.  As our data grows, we can build and push entire read-only stores from hadoop to an operational cluster with a few commands.</p>
+
+<p>Download and unpack voldemort:</p><pre><code>cd
+wget --no-check-certificate <a href="https://github.com/downloads/voldemort/voldemort/voldemort-0.90.1.tar.gz">https://github.com/downloads/voldemort/voldemort/voldemort-0.90.1.tar.gz</a>
+tar -xvzf voldemort-0.90.1.tar.gz
+cd voldemort-0.90.1
+</code></pre>
+
+<p>Follow the instructions <a href="http://project-voldemort.com/quickstart.php">here</a> to start voldemort:</p>
+
+<pre><code>bin/voldemort-server.sh config/single_node_cluster &gt; /tmp/voldemort.log &amp;</code></pre>
+
+<p>Install the voldemort-rb gem.  Works with JRuby too:</p>
+
+<pre><code>gem install nokogiri
+gem install ruby_protobuf
+gem install voldemort-rb
+</code></pre>
+
+<p>Now in ruby we connect to our voldemort cluster, loop through our avro records and insert a new entry for each:</p> 
+
+<pre><code>
+require 'rubygems'
+require 'avro'
+require 'voldemort-rb'
+require 'json'
+
+client = VoldemortClient.new("test", "localhost:6666")
+
+file = File.open('/tmp/per_user.avro/part-r-00000.avro', 'r+')
+dr = Avro::DataFile::Reader.new(file, Avro::IO::DatumReader.new)
+dr.each do |record| 
+  client.put record["user_key"], JSON(record["messages"])
+end
+</code></pre>
+
+<p>Finally&hellip; we want to see our data in the browser.  A one-page <a href="http://www.sinatrarb.com/intro">Sinatra</a> web app gets us there.  Install Sinatra:</p>
+
+<pre><code>gem install sinatra
+</code></pre>
+
+Our sinatra app looks like:
+
+<pre><code>require 'rubygems'
+require 'sinatra'
+require 'avro'
+require 'voldemort-rb'
+require 'json'
+
+# connect to voldemort
+client = VoldemortClient.new("test", "localhost:6666")
+
+get '/messages_per_user_id/:user_id' do |user_id|
+  client.get "messages_per_user_id:#{user_id}"
+end
+</code></pre>
+
+<p>We can see our plumbed data at <a href="http://localhost:4567/messages_per_user_id/1">http://localhost:4567/messages_per_user_id/1</a> or <a href="http://localhost:4567/messages_per_user_id/2">http://localhost:4567/messages_per_user_id/2</a></p>
+
+<p>The data at <a href="http://localhost:4567/messages_per_user_id/1">http://localhost:4567/messages_per_user_id/1</a> looks like this: 
+
+</p><pre><code>[{"message_id":12},{"message_id":11}]</code></pre>
+
+<p>Note that we haven&rsquo;t touched Hadoop yet.  :)  It is simply not neccessary to do so, in order to get started using the tools.  We&rsquo;ve made platform choices that will let us aggregate and mine data at scale, and we&rsquo;ve gotten them up and running in a few minutes on our local machines. </p>
+
+<p>In future posts, we&rsquo;ll extend this to work at scale on Amazon Web Services and Heroku.</p>
+</body>
+</html>

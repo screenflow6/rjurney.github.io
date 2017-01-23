@@ -1,0 +1,20 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>In our last four posts, we covered <a href="http://datasyndrome.com/post/51657080886/downloading-and-processing-the-github-data">Downloading and Processing the Github Archive</a>, <a href="http://datasyndrome.com/post/51755735612/github-archives-18-event-types">Github&rsquo;s 18 event types</a>, <a href="http://datasyndrome.com/post/51820658863/an-implied-rating-system-from-the-github-archive">creating an implied rating system</a> and <a href="http://datasyndrome.com/post/52071797939/pearsons-correlation-between-github-projects">calculating a Pearson&rsquo;s correlation between projects</a>.</p>
+
+<p>To create an item-based nearest neighbor recommender, <a href="http://mines.humanoriented.com/classes/2010/fall/csci568/portfolio_exports/sphilip/cos.html">cosine similarity</a> is a better measure of similarity between projects. Below, we implement that measure between github projects using Pig and Python.</p>
+
+<div class="gist"><a href="https://gist.github.com/rjurney/5716929">https://gist.github.com/rjurney/5716929</a></div>
+
+<p>Once we have a distance between projects, we can immediately display the most similar projects:</p>
+
+<div class="gist"><a href="https://gist.github.com/rjurney/5716952">https://gist.github.com/rjurney/5716952</a></div>
+</body>
+</html>

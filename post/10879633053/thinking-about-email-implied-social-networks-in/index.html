@@ -1,0 +1,29 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>Note: if you like this post, you&rsquo;ll want to learn more about the <a target="_blank" href="http://tinkerpop.com">Tinkerpop</a> stack.</p><p>A few months ago, my health improved for a bit, and I was able to do some thinking about email.  I believe your most valuable, <strong>untapped</strong> social network is in your <strong>inbox</strong>.  I thought about competing with Xobni, Rapportive, etc. from a more analytics-intensive, social network analysis perspective.  More than that, I wanted to create a new kind of social network based on a new kind of sharing.</p>
+<p>So I set about slurping gmail and yahoo via <a target="_blank" href="http://code.google.com/apis/gmail/oauth/">OAuth IMAP</a>.  To grab a few emails is trivial.  To reliably get the entire mailbox - often 100s of thousands of messages, is actually hard.  Many exceptions can crop at many levels of the stack, and you&rsquo;ve got to catch all you can and resume on failure.  And who the fuck knew that Ruby has Error in addition to Exception as a base level Error/Exception thingy?  Not me, for about a week of debugging.</p>
+<ul><li>Slurping data can be exhaustively time-consuming.  Plan for it.</li>
+<li>Consider - maybe you don&rsquo;t need all the data to ship your first version.</li>
+</ul><p>I built an in-ram, <a target="_blank" href="http://project-voldemort.com/">Voldemort</a>-backed summary of your inbox social network in real-time using <a target="_blank" href="http://jruby.org/">JRuby</a> and <a target="_blank" href="https://github.com/pangloss/pacer">Pacer</a>.  Then I set about visualizing it to see where I was at.</p>
+<ul><li>Visualize first, or you cannot product manage your analytics product.  Remember, there&rsquo;s an extra variable here: what is possible to derive from the data.  You want to be informed and surprised.  Plan for epiphany.</li>
+</ul><p>This is a print of an early iteration of a visualization of an inbox using the OpenORD layout in <a href="http://gephi.org/" target="_blank">Gephi</a>.  Grey lines are unreciprocated, the blue lines are reciprocated.  I thought about improving and selling these for ramen profitability.</p>
+<p><img height="500" width="500" src="http://farm7.static.flickr.com/6177/6199936166_1c388e066e.jpg" align="middle"/></p>
+<p>The problem here in thinking about what kind of features to build into a simpler, list-based HTML interface is that there is way too much noise.  You can&rsquo;t easily make inferences about your own network.  So I looked at all the filters in <a target="_blank" href="http://www.amazon.com/Social-Network-Analysis-Applications-Structural/dp/0521387078">Wasserman</a> and the literature.  The first one I tried was the <a target="_blank" href="http://en.wikipedia.org/wiki/Degeneracy_(graph_theory)#k-Cores">k-core</a>, which works great in social graphs.  </p>
+<p><img height="500" width="500" src="http://farm7.static.flickr.com/6174/6199938982_f01afd6f34.jpg" align="middle"/></p>
+<p>It turns out though, that k-cores are pretty terrible in <strong>weighted</strong> social <strong>networks</strong>.  There are several implementations of weighted k-cores for social networks.  After some searching, I found one that worked reasonably well and implemented it in Pacer.</p>
+<p><img height="500" width="500" src="http://farm7.static.flickr.com/6159/6199427171_00d7c3d360.jpg" align="middle"/></p>
+<p>After I had these really clear summaries of social networks, I started doing simple <a target="_blank" href="http://en.wikipedia.org/wiki/Natural_language_processing">NLP</a> of the emails themselves as they streamed in: splitting emails into significant n-grams (2 and 3-grams mostly) and doing a TF-IDF summarization of its content.  This enables topic-specific maps, and it enables you to track the flow of n-grams across your network, and all kinds of interesting things.</p>
+<p><img height="500" width="500" src="http://farm7.static.flickr.com/6138/6199428409_333a963e03.jpg" align="middle"/></p>
+<p>What I was doing next was the point of the entire thing, and just in case&hellip; I&rsquo;m not telling.  It is really cool, and if I had my health I&rsquo;d be kicking ass with this idea.  Or it would have flopped.  But I would have known.</p>
+<p>Then my pain got bad again and I fell on my ass.  I have an application up at <a href="http://kontexa.com">http://kontexa.com</a> that will OAuth into your gmail.  If I fire off a command, I can make you a poster and with a little fine tuning, email it to you, or print it and mail it in one of those tubes taking up so much space in my office.  Thats as far as I got before I flared.</p>
+<p>Now I&rsquo;m able to work part time, and I need to pay the bills&hellip; you can&rsquo;t part-time a startup.  I got a part-time gig with a very cool company.  So this whole thing is shelved.  But this is the direction of what I was doing.  I thought I would share.</p>
+<p>Can you guess the cleverness from the picture above?</p>
+</body>
+</html>

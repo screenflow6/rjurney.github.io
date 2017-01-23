@@ -1,0 +1,73 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>MongoDB is <a href="http://www.mongodb-is-web-scale.com/">Web Scale</a>.  Lulz, right?  Turns out, Mongo is the first NoSQL to nail painless Hadoop and Pig integration&hellip; thus becoming the first &lsquo;web scale&rsquo; database.</p>
+
+<p><b>Proof</b>:</p>
+
+<p>Install Mongo &amp; run it: <a href="http://www.mongodb.org/display/DOCS/Quickstart">http://www.mongodb.org/display/DOCS/Quickstart</a></p>
+
+<p>Install Mongo&rsquo;s hadoop integration:</p>
+
+<pre><code>git clone <a href="https://github.com/mongodb/mongo-hadoop">https://github.com/mongodb/mongo-hadoop</a>
+cd mongo-hadoop
+mvn install
+cd examples
+mvn install # Then check out pigtutorial/
+cd ..
+wget <a href="https://github.com/downloads/mongodb/mongo-java-driver/mongo-2.3.jar">https://github.com/downloads/mongodb/mongo-java-driver/mongo-2.3.jar</a></code></pre>
+
+<pre><code>REGISTER /me/pig/build/ivy/lib/Pig/avro-1.5.3.jar
+REGISTER /me/pig/build/ivy/lib/Pig/json-simple-1.1.jar
+REGISTER /me/pig/contrib/piggybank/java/piggybank.jar
+REGISTER /me/pig/build/ivy/lib/Pig/jackson-core-asl-1.7.3.jar
+REGISTER /me/pig/build/ivy/lib/Pig/jackson-mapper-asl-1.7.3.jar
+
+
+<b>REGISTER /me/mongo-hadoop/mongo-2.3.jar
+REGISTER /me/mongo-hadoop/core/target/mongo-hadoop-core-1.0-SNAPSHOT.jar
+REGISTER /me/mongo-hadoop/pig/target/mongo-pig-1.0-SNAPSHOT.jar
+</b>
+
+DEFINE AvroStorage org.apache.pig.piggybank.storage.avro.AvroStorage();
+sh rm -rf '/tmp/sent_counts.avro' /* Workaround for PIG-2441 */
+
+messages = LOAD '/tmp/10000_emails.avro' USING AvroStorage();
+messages = FILTER messages BY from IS NOT NULL AND to IS NOT NULL;
+smaller = FOREACH messages GENERATE from, to;
+pairs = FOREACH smaller GENERATE from, FLATTEN(to) AS to:chararray;
+pairs = FOREACH pairs GENERATE LOWER(from) AS from, LOWER(to) AS to;
+
+froms = GROUP pairs BY (from, to);
+sent_counts = FOREACH froms GENERATE FLATTEN(group) AS (from, to), SIZE(pairs) AS total;
+-- STORE sent_counts INTO '/tmp/sent_counts.avro' USING AvroStorage();
+STORE sent_counts INTO 'mongodb://localhost/test.pig' USING com.mongodb.hadoop.pig.MongoStorage;</code></pre>
+
+<p>Note that the use of Avro is optional, but is fun too.</p>
+
+<p>Check out your data:</p>
+
+<pre><code>bash$ mongo pig
+
+
+&gt; show collections
+pig
+
+
+&gt; db.pig.find()
+
+
+{ "_id" : ObjectId("4ef2dc29f37d4e414133e522"), "from" : "dwr@touk.pl", "to" : "user@hive.apache.org", "total" : NumberLong(1) }
+{ "_id" : ObjectId("4ef2dc29f37d4e414233e522"), "from" : "brad@bing.com", "to" : "common-user@hadoop.apache.org", "total" : NumberLong(1) }
+{ "_id" : ObjectId("4ef2dc29f37d4e414333e522"), "from" : "jsichi@fb.com", "to" : "dev@hive.apache.org", "total" : NumberLong(1) }
+{ "_id" : ObjectId("4ef2dc29f37d4e414433e522"), "from" : "jsichi@fb.com", "to" : "user@hive.apache.org", "total" : NumberLong(2) }</code></pre>
+
+<p><b>MongoDB is web scale.</b>  Who would have thought?  Usability matters.  90% there is not enough.  ;)</p>
+</body>
+</html>

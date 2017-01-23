@@ -1,0 +1,61 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>When running iterative tasks on your machine, it is frustrating to have to start over if an exception is thrown. For this reason, I hacked this simple utility to resume. Enjoy!</p>
+
+
+<p>Utility functions:</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888"># util.py</span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">log_place</span>(filename, record):
+  f <span style="color: #333333">=</span> codecs<span style="color: #333333">.</span>open(filename, <span style="background-color: #fff0f0">'w'</span>, <span style="background-color: #fff0f0">'utf8'</span>)
+  f<span style="color: #333333">.</span>write(json<span style="color: #333333">.</span>dumps(record))
+  f<span style="color: #333333">.</span>close()
+  <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">True</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">load_place</span>(filename):
+  <span style="color: #008800; font-weight: bold">if</span> os<span style="color: #333333">.</span>path<span style="color: #333333">.</span>isfile(filename): 
+    f <span style="color: #333333">=</span> codecs<span style="color: #333333">.</span>open(filename, <span style="background-color: #fff0f0">'r'</span>, <span style="background-color: #fff0f0">'utf8'</span>)
+    record <span style="color: #333333">=</span> json<span style="color: #333333">.</span>loads(f<span style="color: #333333">.</span>read())
+    f<span style="color: #333333">.</span>close()
+    <span style="color: #008800; font-weight: bold">return</span> record
+  <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">False</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">resume_place_in_list</span>(record, a_list):
+  <span style="color: #008800; font-weight: bold">for</span> i, item <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">enumerate</span>(a_list):
+    <span style="color: #008800; font-weight: bold">if</span> dicts_are_equal(item, record):
+      <span style="color: #008800; font-weight: bold">return</span> i
+  <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0000DD; font-weight: bold">0</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">dicts_are_equal</span>(dict_1, dict_2):
+  unmatched_item <span style="color: #333333">=</span> <span style="color: #007020">set</span>(dict_1<span style="color: #333333">.</span>items()) <span style="color: #333333">^</span> <span style="color: #007020">set</span>(dict_2<span style="color: #333333">.</span>items())
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #007020">len</span>(unmatched_item) <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">True</span>
+  <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">False</span>
+</pre></div>
+
+<br/><p>Using this utility in your main loop is easy:</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888"># main.py</span>
+records <span style="color: #333333">=</span> util<span style="color: #333333">.</span>json_cr_file_2_array(args<span style="color: #333333">.</span>file)
+  
+<span style="color: #888888"># Load our place</span>
+starting_place <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+place_record <span style="color: #333333">=</span> util<span style="color: #333333">.</span>load_place(PLACE_LOG_FILENAME)
+<span style="color: #008800; font-weight: bold">if</span> place_record:
+  starting_place <span style="color: #333333">=</span> util<span style="color: #333333">.</span>resume_place_in_list(place_record, records)
+  
+<span style="color: #008800; font-weight: bold">for</span> i, record <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">enumerate</span>(records):
+  <span style="color: #008800; font-weight: bold">if</span> i <span style="color: #333333">&lt;=</span> starting_place <span style="color: #000000; font-weight: bold">and</span> starting_place <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+    <span style="color: #008800; font-weight: bold">continue</span>
+  <span style="color: #333333">...</span>
+  util<span style="color: #333333">.</span>log_place(PLACE_LOG_FILENAME, record)
+</pre></div>
+</body>
+</html>

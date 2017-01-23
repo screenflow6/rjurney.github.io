@@ -1,0 +1,115 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+The data in this example comes from Andrew Ng&rsquo;s Coursera class, homework assignment 1. I&rsquo;m working the examples in Python as well as MATLAB to better remember application, and to ease the pain of using MATLAB :)
+
+The data looks like this:
+
+<pre><code>2104,3,399900
+1600,3,329900
+2400,3,369000
+1416,2,232000
+3000,4,539900
+1985,4,299900
+1534,3,314900
+1427,3,198999
+1380,3,212000
+1494,3,242500
+1940,4,239999
+2000,3,347000
+1890,3,329999
+4478,5,699900
+1268,3,259900
+2300,4,449900
+1320,2,299900
+1236,3,199900
+2609,4,499998
+3031,4,599000
+1767,3,252900
+1888,2,255000
+1604,3,242900
+1962,4,259900
+3890,3,573900
+1100,3,249900
+1458,3,464500
+2526,3,469000
+2200,3,475000
+2637,3,299900
+1839,2,349900
+1000,1,169900
+2040,4,314900
+3137,3,579900
+1811,4,285900
+1437,3,249900
+1239,3,229900
+2132,4,345000
+4215,4,549000
+2162,4,287000
+1664,2,368500
+2238,3,329900
+2567,4,314000
+1200,3,299000
+852,2,179900
+1852,4,299900
+1203,3,239500</code></pre>
+
+In the first example we do simple single linear regression using scipy.stats.linregress:
+
+<pre><code>    from scipy import stats
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    # Build X/Y arrays from file 1
+    f = open('ex1data1.txt')
+    lines = f.readlines()
+    x = []
+    y = []
+    for line in lines:
+        line = line.replace("\n", "")
+        vals = line.split(",")
+        x.append(float(vals[0]))
+        y.append(float(vals[1]))
+
+    # Run regression
+    gradient, intercept, r_value, p_value, std_err = stats.linregress(x,y)
+    print gradient, intercept, r_value, p_value, std_err
+
+    plt.scatter(x, y)
+    plt.plot(x, (gradient*x + intercept))</code></pre>
+
+In the second example, we do multiple regression using sklearn.linear_model.LinearRegression()
+
+ <pre><code>   from sklearn import  linear_model
+    
+    # Build X, Y from 2nd file
+    f = open('ex1data2.txt')
+    lines = f.readlines()
+    x1 = []
+    x2 = []
+    y = []
+    for line in lines:
+        line = line.replace("\n", "")
+        vals = line.split(",")
+        x1.append(float(vals[0]))
+        x2.append(float(vals[1]))
+        y.append(float(vals[2]))
+
+    x1 = np.array(x1)
+    x2 = np.array(x2)
+    y = np.array(y)
+
+    # linregress doesn't do multi regression, so we use sklearn
+    ones = np.ones(x1.shape)
+    x = np.vstack([x1, x2]).T # don't need ones for 
+
+    regr = linear_model.LinearRegression()
+    regr.fit( x, y )
+    regr.predict([3000, 3]) </code></pre>
+</body>
+</html>

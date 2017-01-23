@@ -1,0 +1,86 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>The Github Archive is a rich dataset available to all via <a href="http://www.githubarchive.org/">githubarchive.org</a>. In this post we will download and create relations from the github archive.</p> 
+
+<p>Instructions for downloading it are available on that site, but don&rsquo;t work well with the version of Bash included with some versions of Mac OS X. To download the github data, I created a ruby script called <a href="https://github.com/rjurney/github-explorer/blob/master/get_all_data.rb">get_all_data.rb</a> which will do the job.</p>
+
+<pre><code>def prepend(number)
+  return number &lt;= 9 ? ("0" + number.to_s) : number.to_s
+end
+
+for year in ['11', '12', '13'] do
+  for month in (1..12) do
+    month = prepend(month)
+    for day in (1..31) do
+      day = prepend(day)
+      unless File.exist?("data/20#{year}-#{month}-#{day}-23.json.gz")
+        system "wget -P data/ <a href="http://data.githubarchive.org/20#%7Byear%7D-#%7Bmonth%7D-#%7Bday%7D-%7B0..24%7D.json.gz">http://data.githubarchive.org/20#{year}-#{month}-#{day}-{0..24}.json.gz</a>"
+      else
+        puts "Skipped file...\n\n\n"
+      end
+    end
+  end
+end
+</code></pre>
+
+<p>That script will produce 8,760 gzip files per year - 24 for each hour per day * 365 days. In my own experiments, I work with the data between 2012 and present day, which is about 90GB uncompressed json. Unzipped, the files contain a list of JSON objects that describe 18 event types, delineated by the common field, &lsquo;type.&rsquo; This type field can be used to split the data into 18 relations of like-formatted records. Splitting records this way is a common step for processing this data, and is therefore best split out in a pre-processing step for efficiency&rsquo;s sake. We&rsquo;ll use Apache Pig to split our data into relations.</p>
+
+<p>From the <a href="http://pig.apache.org/">Apache Pig site</a>:
+
+<i>Apache Pig is a platform for analyzing large data sets that consists of a high-level language for expressing data analysis programs, coupled with infrastructure for evaluating these programs. The salient property of Pig programs is that their structure is amenable to substantial parallelization, which in turns enables them to handle very large data sets.</i></p>
+
+<p>Pig lets us define dataflows to query any data, large or small. We can load JSON records into Pig maps using the <a href="https://github.com/kevinweil/elephant-bird">elephant-bird project&rsquo;s</a> <a href="https://github.com/kevinweil/elephant-bird/blob/master/pig/src/main/java/com/twitter/elephantbird/pig/load/JsonLoader.java">JsonLoader</a>. To get Pig to parse these records though, we need a carriage return after each one instead of a Javascript array of objects. To achieve this, I created a simple script called <a href="https://github.com/rjurney/github-explorer/blob/master/newline_format.rb">newline_format.rb</a> based on the githubarchive example. It is simple:
+
+</p><pre><code>require 'rubygems'
+require 'zlib'
+require 'yajl'
+ 
+Dir.glob('data/*.json.gz').each do |f|
+  begin
+    gz = open(f)
+    js = Zlib::GzipReader.new(gz).read
+ 
+    Yajl::Parser.parse(js) do |event|
+      puts Yajl::Encoder.encode(event)
+    end
+  rescue
+  end
+end
+gz.close
+</code></pre>
+
+This can be run locally in hours or as a Hadoop streaming job in minutes. It will produce one large JSON file. Next, we split that file using <a href="https://github.com/rjurney/github-explorer/blob/master/split_events.pig">split_events.pig</a>.
+
+<pre><code>github_events = load '/tmp/newline.json' using com.twitter.elephantbird.pig.load.JsonLoader() as json:map[];
+
+SPLIT github_events INTO CommitCommentEvent IF $0#'type' == 'CommitCommentEvent',
+                         CreateEvent IF $0#'type'        == 'CreateEvent',
+                         DeleteEvent IF $0#'type'        == 'DeleteEvent',
+                         DownloadEvent IF $0#'type'      == 'DownloadEvent',
+                         FollowEvent IF $0#'type'        == 'FollowEvent',
+                         ForkEvent IF $0#'type'          == 'ForkEvent',
+                         ForkApplyEvent IF $0#'type'     == 'ForkApplyEvent',
+                         GistEvent IF $0#'type'          == 'GistEvent',
+                         GollumEvent IF $0#'type'        == 'GollumEvent',
+                         IssueCommentEvent IF $0#'type'  == 'IssueCommentEvent',
+                         IssuesEvent IF $0#'type'        == 'IssuesEvent',
+                         MemberEvent IF $0#'type'        == 'MemberEvent',
+                         PublicEvent IF $0#'type'        == 'Public Event',
+                         PullRequestEvent IF $0#'type'   == 'PullRequestEvent',
+                         PullRequestReviewCommentEvent IF $0#'type' == 'PullRequestReviewCommentEvent',
+                         PushEvent IF $0#'type'          == 'PushEvent',
+                         TeamAddEvent IF $0#'type'       == 'TeamAddEvent',
+                         WatchEvent IF $0#'type'         == 'WatchEvent';</code></pre>
+
+<p>This data is now split into 18 different files, ranging from megabytes to gigabytes, which can be joined together as needed. At this point the data is still within the capabilities of Pig&rsquo;s local mode, <code>pig -l /tmp -x local</code> to process the data, so you can begin experimenting locally. In my own case, the data quickly balooned to nearly 1TB, necessitating uploading the split data to S3 and continuing my analysis using Hadoop via Elastic MapReduce.</p>
+
+<p>In the next post, we&rsquo;ll look at what these 18 different event types have to offer.</p>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>&ldquo;How do you QA Big Data Pipelines?&rdquo; </p>
+
+<p>The harsh reality is that some extent: you can&rsquo;t, as many errors are emergent as data volumes increase. One out of a large enough group of records must be corrupt. For what its worth, this is what I have on the topic:</p>
+
+<p>I started a discussion of Big Data ETL here on Quora, and there were some great answers: <a href="http://www.quora.com/Big-Data/In-Big-Data-ETL-how-many-records-are-an-acceptable-loss">http://www.quora.com/Big-Data/In-Big-Data-ETL-how-many-records-are-an-acceptable-loss</a></p>
+
+<p><i>In general I would think that you only care about record loss during ETL if it meaningfully impacts the answer to some question on the transformed data.</i></p>
+
+<p>Pig could pioneer a sane approach via the ON ERROR proposal, which would let you split errant records off into its own relation to deal with as needed by a custom User-Defined-Function. This would enable you to alter your pipelines to accommodate the errant records, or would at least let you understand the type of records that are going missing. In addition, you PIG-2620 would allow you to set thresholds for errors: up to some % and/or some raw number of records lost.</p>
+
+<p><a href="https://issues.apache.org/jira/browse/PIG-2620">https://issues.apache.org/jira/browse/PIG-2620</a><br/>
+<a href="http://wiki.apache.org/pig/PigErrorHandlingInScripts">http://wiki.apache.org/pig/PigErrorHandlingInScripts</a></p>
+</body>
+</html>

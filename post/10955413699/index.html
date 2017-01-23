@@ -1,0 +1,50 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>Hadoop is maturing, with <a href="http://hadoop.apache.org/hdfs/">HDFS</a> and <img src="http://farm7.static.flickr.com/6159/6205546214_875f6c02f4_m.jpg" align="right"/><a href="http://zookeeper.apache.org/">ZooKeeper</a> acting as the foundation for forms of bulk computation beyond <a href="http://hadoop.apache.org/mapreduce/">MapReduce</a>.  This, and other developments, represent a significant change from the &lsquo;plumbing&rsquo; focused discussions of the last few years.</p>
+
+<p>Only a couple of years ago, nearly every Hadoop shop built its own ETL, high-level MapReduce language, scheduler, custom Java MapReduce jobs, and the development team often ran the cluster.  Furthermore, many types of data processing were ineffective, inefficient or impossible for Hadoop developers.</p>
+
+<p><b>All of this has changed.  Here&rsquo;s how:</b></p>
+
+<p>Getting Data onto HDFS is easy:</p>
+
+<ul><li><a href="https://github.com/cloudera/sqoop/wiki">Sqoop</a> - If you&rsquo;re playing around with Hadoop and want to throw a database table onto HDFS, <a href="https://github.com/cloudera/sqoop/wiki">Sqoop</a> does so in a one-liner.</li>
+<li><a href="https://github.com/facebook/scribe">Scribe</a> - Facebook has put a lot of work into maturing <a href="https://github.com/facebook/scribe">Scribe</a> into a solid log aggregator - to get log files from server farms onto HDFS.</li>
+<li><a href="https://github.com/cloudera/flume">Flume</a> - Flume can get anything onto HDFS in a reliable manner.
+</li></ul><p>At the storage level, <a href="http://hadoop.apache.org/hdfs/">HDFS</a> has proven its generic utility.</p>
+
+<ul><li><a href="http://hadoop.apache.org/hdfs/">HDFS</a> is a big data <a href="http://en.wikipedia.org/wiki/Network_File_System_(protocol)">NFS</a>.</li>
+</ul><p><a href="http://zookeeper.apache.org/">ZooKeeper&rsquo;s</a> distributed coordination has enabled efficient implementation of different types of bulk synchronous computation on top of HDFS, extending the capabilities of Hadoop into new areas, exposing new opportunities for research and commercialization.  Hadoop now excels at processing both <b>log</b> and <b>graph</b> data.</p>
+
+<ul><li><a href="http://incubator.apache.org/projects/giraph.html">Apache Giraph</a> enables rapid implementation of graph algorithms that are awkward and inefficient when written in raw MapReduce.</li>
+<li><a href="http://www.goldenorbos.org/">GoldenOrb</a> offers a Java-based Pregel clone for graph processing from the perspective of a graph&rsquo;s vertices.</li>
+</ul><p>High level languages for MapReduce data processing have become the dominant form of Hadoop computations.</p>
+
+<ul><li><b><a href="http://hive.apache.org/">HIVE</a></b> has served as a simple and familiar SQL-based introduction to data processing on Hadoop.<br/><br/>
+
+In the business intelligence sphere, <a href="http://hive.apache.org/">HIVE</a> has eliminated the exponential increase in the cost of analyzing atomic metrics once data volume exceeds the capacity of one large commodity machine, necessitating costly proprietary network storage solutions and the accompanying massive 'Oracle tax&rsquo; on the enterprise.  The development of <a href="http://www.karmasphere.com/">tools</a> to work with semi-structured and un-structured data alongside SQL tables has amplified HIVE&rsquo;s value for the analyst.</li>
+
+<li>Better integration with relational databases makes getting data off Hadoop simpler.  This has amplified the value of Hadoop&rsquo;s Java-based data-processing model by enabling rapid ad hoc analysis in SQL on a RDBMS of the output of complex operations coded more easily on the JVM in Hadoop.</li>
+
+<li>As <a href="http://pig.apache.org/">Apache Pig</a> approaches version 1.0, it has matured into a turing-complete language ideally suited to harness the power of the data-flow oriented MapReduce model of computation.  With UDFs in many languages, and the unique, predictive power of a functional ILLUSTRATE command and associated tools, Pig is becoming the default method of ETL as well as more complex algorithmic implementation for data pipelines.  
+
+It is hoped that in the near future, the development of tools for Pig will parallel those for HIVE, or that existing open source ETL tools will fill this gap.</li>
+</ul><p><img src="http://farm7.static.flickr.com/6011/6205061547_28f47d51de_m.jpg" align="left"/>Tighter integration with key/value stores has enabled the rapid deployment of mined data from HDFS into a production environment for easily scalable consumption by end users.</p>
+
+<ul><li><a href="http://hbase.apache.org/">HBase</a>, the Hadoop database and <a href="http://project-voldemort.com/">Project Voldemort</a> are both highly available NoSQL solutions with tight integration with Hadoop.
+</li>
+</ul><p>In sum: the Hadoop Pantheon continues to branch and grow, creating opportunities for new kinds of applications and ventures as each tool is applied to different application domains.<br/></p>
+
+<ul><li>Update: The key development here is that <b>Hadoop&rsquo;s plumbing has matured, and that Hadoop now works well on graph and network data</b>.  However, a number of deserving projects not including here are:</li>
+</ul><ul><li>MongoDB - has added Hadoop integration</li>
+<li>Mahout - command-line machine learning on hadoop with working examples example data-sets.  Damned good way to get you started leveraging machine learning in your data processing.</li>
+</ul><p>Please continue to submit updates and corrections and I will continue to update the post.</p>
+</body>
+</html>

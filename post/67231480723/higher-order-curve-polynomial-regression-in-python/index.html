@@ -1,0 +1,46 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+Pulled from this <a href="https://github.com/mrocklin/multipolyfit/blob/master/multipolyfit/core.py">example on stackoverflow</a>, we can perform a higher order (x squared) polynomial regress against the same data from example one in the last post:
+
+<pre><code>from scipy import stats
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import curve_fit
+
+# Build X/Y arrays from file 1
+f = open('ex1data1.txt')
+lines = f.readlines()
+x = []
+y = []
+for line in lines:
+    line = line.replace("\n", "")
+    vals = line.split(",")
+    x.append(float(vals[0]))
+    y.append(float(vals[1]))
+
+x = np.array(x)
+y = np.array(y)
+
+# Now curve fit a higher polynomial to the same data
+popt, pcov = curve_fit(func, x, y)
+"""
+The result is:
+popt[0] = a , popt[1] = b and popt[2] = c of the function,
+so f(x) = popt[0]*x**2 + popt[1]*x**3 + popt[2].
+"""
+
+print "a = %s , b = %s, c = %s" % (popt[0], popt[1], popt[2])
+"""
+Print the coefficients and plot the funcion.
+"""
+
+plt.plot(x, func(x, *popt), label="Fitted Curve")</code></pre>
+</body>
+</html>

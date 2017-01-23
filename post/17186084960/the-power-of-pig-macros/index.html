@@ -1,0 +1,40 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+When using Pig, one frequently applies a filter to data in a pipeline.  The next question is: how many records were filtered?  The following macro answers this question for you.
+
+<pre><code>/* Get a count of records, return the name of the relation and . */
+DEFINE total_count(relation) RETURNS total {
+  $total = FOREACH (group $relation all) generate '$relation' as label, COUNT_STAR($relation) as total;
+};
+
+/* Get totals on 2 relations, union and return them with labels */
+DEFINE compare_totals(r1, r2) RETURNS totals {
+  total1 = total_count($r1);
+  total2 = total_count($r2);
+  $totals = union total1, total2;
+};
+
+/* See how many records from a relation are removed by a filter, given a condition */
+DEFINE test_filter(original, condition) RETURNS result {
+  filtered = filter $original by $condition;
+  $result = compare_totals($original, filtered);
+};</code></pre>
+
+Example usage:
+
+<pre><code>emails = load '/me/tmp/inbox' using AvroStorage();
+out = test_filter(emails, 'date is not null');
+dump out</code></pre>
+
+<pre>(filtered,70013)
+(emails,70013)
+</pre>
+</body>
+</html>

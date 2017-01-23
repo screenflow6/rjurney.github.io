@@ -1,0 +1,38 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>My first startup was called Lucision.  Thats Lucid + Decision.</p>
+<p>(Never name your startup something weird or clever unless it rolls off the tongue.  It was like naming a kid <a href="http://en.wikipedia.org/wiki/The_Outsiders_(novel)">Soda Pop</a>.  If you don&rsquo;t know what I mean, go listen to <a href="http://www.azlyrics.com/lyrics/johnnycash/aboynamedsue.html">A Boy Named Sue</a>.  Nobody could remember or pronounce &lsquo;Lucision,&rsquo; and I suffered misunderstanding on sales calls for two years because of it.)</p>
+<p>In its first iteration, Lucision aimed to turn court cases into <a href="http://en.wikipedia.org/wiki/Decision_tree">decision trees</a> or <a href="http://en.wikipedia.org/wiki/State_diagram">state diagrams</a>.  Most legal cases are predictable, boilerplate stuff, so firms handle many at once, can&rsquo;t remember them, and have to recreate the state of each in their head when they work on them.  A lawyer friend sketched out a state chart of an eviction on a napkin at the Disco Diner in Atlanta at 2AM, and I was sold.  I spent a lot of time in legal libraries and I took a job doing IT for her law firm while working for my father building the farmhouse I would later live in.  I saved up money, and moved to Goa to focus on building a hot prototype.  I was a Perl hacker and had some bad habits, so it was fortunate that a computer science PhD was living next door.  We became friends, and he tutored me.  I read Design Patterns (and later recovered from it) and Object Oriented Analysis and Design, and built a graph-based document management system using Eclipse.</p>
+<p>Two years ago a friend gave a presentation on Cascading and Hadoop, and why I should care.  He convinced me.  I read the <a href="http://research.yahoo.com/files/paper_5.pdf">PigPen paper</a> and decided to <a href="http://github.com/rjurney/Cloud-Stenography">productize</a> it with <a href="http://neyric.github.com/wireit/">WireIT</a>.  Thats when I realized I was into graphs in a big way.</p>
+<p>I learned graph theory and read up on network flows.  I learned graph layouts.  I solved analytic problems with interactive graphs in <a href="http://processing.org/">Processing</a>.  Graphs, graphs, graphs!  <span>I became obsessed with the <a href="http://www.googlewonderwheel.com/"><span class="s1">Wonder Wheel</span></a>.  </span></p>
+<p class="p1">Which brings us full circle to yesterday, where I think I identified a design pattern: Data-Driven Recursive Interfaces.  </p>
+<p class="p1"><strong>Step 1</strong>) Create interesting, inter-connected records.  This is your problem, but if you look at it the right way your data is probably a graph.  Most interesting data is.  I like to use <a href="http://hadoop.apache.org/">Hadoop</a>, <a href="http://pig.apache.org/">Pig</a> and <a href="http://www.scipy.org/">Python</a> to do this.  Shrink the big or medium data into summaries you can serve for people to consume directly.</p>
+<p class="p1"><strong>Step 2</strong>) Store these records as objects in a key/value store, like so:</p>
+<p class="p1">key =&gt; {property1, property2, links =&gt; [key1, key2, key3]}</p>
+<p class="p1">Split records as properties increase and become complex to avoid deep nesting.  Or go at it as a document.  Both approaches are valid if they fit your data.</p>
+<p class="p1"><strong>Step 3</strong>) Use a lightweight web framework like <a href="http://www.sinatrarb.com/">Sinatra</a> to emit the key/value data as JSON, or use a key/value store that returns JSON in the first place.</p>
+<p class="p1">In Ruby/Sinatra with <a href="http://project-voldemort.com/">Voldemort</a>, generating JSON to go directly in a protovis chart looks like this (leave my Ruby alone):</p>
+<blockquote>
+<p class="p1">get &rsquo;/experience/:title&rsquo; do |title|</p>
+<p class="p1">  experience = experience_client.get(title)</p>
+<p class="p1">  values = []</p>
+<p class="p1">  experience['by_years&rsquo;].each do |i|</p>
+<p class="p1">    values &lt;&lt; {'x&rsquo; =&gt; i['start_years&rsquo;], 'y&rsquo; =&gt; i['total&rsquo;]}</p>
+<p class="p1">  end</p>
+<p class="p1">  JSON.generate(values)</p>
+<p class="p1">end</p>
+</blockquote>
+<p class="p1"><strong>Step 4</strong>) Construct a single, light-weight interface, that renders the keys into HTML/JS.  Use visualization: <a href="http://vis.stanford.edu/protovis/">Protovis</a>, <a href="http://raphaeljs.com/">Raphael</a>, <a href="http://processingjs.org/">ProcessingJS</a>, etc.  Add HTML links between records.</p>
+<p class="p2"><img height="360" width="510" src="http://farm2.static.flickr.com/1354/5103245691_26ea3ed91f_z.jpg" align="middle"/></p>
+<p class="p1"><strong>Result:</strong> Using batch processing, a key/value store, and light web and visualization frameworks&hellip; you made one simple type of record and an interface for it that enables endless exploration.  I call that tremendous bang for the buck, and the technology stack helps you along the way.  It is opinionated, as though this is the kind of thing you are supposed to be doing because there is such little impedance between the model and view.</p>
+<p class="p1">In contrast to relational database systems, Hadoop and NoSQL facilitates graph centric interfaces and enable graph-centric exploration and thinking.  </p>
+<p class="p1">A record in a table is no longer the base unit.  Tables aren&rsquo;t real.  Graphs are real.  Take note.</p>
+</body>
+</html>

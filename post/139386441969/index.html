@@ -1,0 +1,30 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>I am vectorizing some features in sklearn, and I have run into a problem. DictVectorizer works well if your data can be encoded into one dict per item. What if your items can have two values of the same column? 
+
+For instance, DictVectorizer works fine on an item like this one:
+
+<code><pre>{'a': 'b', 'b': 'c'}</pre></code>
+
+But what about something like this, with more than one value per column? 
+
+<code><pre>{‘a’: [‘b’,’c’], ‘b’: ‘d’}</pre></code>
+
+The strategy of one-hot-encoding can still apply, you simply want two a columns… a=b and a=c. So far as I can tell, no such vectorizer exists!
+
+What is one supposed to do in this situation? Do I need to create my own MultiDictVectorizer?</p>
+
+<p>I just <a href="http://stackoverflow.com/questions/35421205/how-can-i-encode-features-with-more-than-one-value-per-column-multidictvectoriz">posted this</a> to StackOverflow.</p>
+
+<p>To answer my own question, I am adding support for lists to DictVectorizer, or creating a new class MultiDictVectorizer that does so. From StackOverflow:</p>
+
+<bq>DictVectorizer can&rsquo;t handle multiple values per key, so I am adding this ability to it. If the pull is accepted, this will be a part of sklearn. If not, I will subclass DictVectorizer in MultiDictVectorizer and will release a package for this class.<br/><br/><a href="https://github.com/scikit-learn/scikit-learn/pull/6369">Pull request at Github</a><br/><a href="https://github.com/scikit-learn/scikit-learn/issues/6368">Issue in sklearn Github project</a></bq>
+</body>
+</html>

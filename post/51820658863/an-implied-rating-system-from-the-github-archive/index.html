@@ -1,0 +1,50 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>In our last two posts, we covered <a href="http://datasyndrome.com/post/51657080886/downloading-and-processing-the-github-data">Downloading and Processing the Github Archive</a> and <a href="http://datasyndrome.com/post/51755735612/github-archives-18-event-types">Github&rsquo;s 18 event types</a>.
+
+</p><p>In this post we&rsquo;re going to create an implied rating system from the <a href="http://www.githubarchive.org/">Github Archive Data</a>. Implied rating systems - as opposed to a literal or direct rating systems - are inferred from records of user actions or gestures. You&rsquo;re familiar with implied ratings already: your FICO score is an implied rating. Just like your credit record, the <a href="http://www.githubarchive.org/">github archive</a> is a rich set to infer ratings from, consisting of over 100GB of user actions from which we can infer ratings for github repositories. Inferred ratings are great for building recommender systems, which we&rsquo;ll talk more about in the next post.</p>
+
+
+<p>I reviewed the <a href="http://datasyndrome.com/post/51755735612/github-archives-18-event-types">18 github archive event types (covered yesterday)</a>, and came up with the following implied rating system:</p>
+
+
+<br/><p><b>ViewEvent (missing) - 0.0 Rating</b></p>
+
+
+<p>Missing from this analysis are github&rsquo;s web traffic logs, which are not public. Were we able to access those, we would rate a project 0.0 when a user views it but does not interact with it. This has the effect of dramatically increasing the scope of between-user comparisons we end up performing, increasing the performance of our recommender system.</p>
+
+<br/><p><b>WatchEvent - 1.0 Rating</b></p>
+
+<p>A WatchEvent is generated when a user clicks &lsquo;watch project&rsquo; on a github project. This indicates interest in the project and we assign it an implied rating of 1.0.</p>
+
+<div class="gist"><a href="https://gist.github.com/rjurney/5686720">https://gist.github.com/rjurney/5686720</a></div>
+
+
+<p><b>IssuesEvent - 2.0 Rating</b></p>
+
+<p>An IssuesEvent is generated when a user files an issue with a github project. This implies the user has acquired and attempted to use the project, so we give this a 2.0 implied rating.</p>
+
+<div class="gist"><a href="https://gist.github.com/rjurney/5687106">https://gist.github.com/rjurney/5687106</a></div>
+
+<br/><p><b>ForkEvent - 3.0 Rating</b></p>
+
+<p>A ForkEvent occurs when a user forks a project, which means he is not only interested in using it but potentially in modifying it and contributing code back. Therefore we give this an implied rating of 3.0.</p>
+
+<div class="gist"><a href="https://gist.github.com/rjurney/5687232">https://gist.github.com/rjurney/5687232</a></div>
+
+<br/><p><b>CreateEvent - 4.0 Rating</b></p>
+
+<p>A CreateEvent occurs when a user creates a new project. This is the highest implied vote of 4.0.</p>
+
+<div class="gist"><a href="https://gist.github.com/rjurney/5687269">https://gist.github.com/rjurney/5687269</a></div>
+
+<p>As you can see, we&rsquo;ve created implied ratings from 0.0 - 4.0, which will enable us to create a recommender system tomorrow!</p>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>I was a bit hasty in my posts about MongoStorage for Pig.  It seems that complex types are not supported - which limits the value of Pig/Mongo integration.  What one wants to do is to process data on Hadoop, and then group it for serving via MongoDB.  Without BAGs and TUPLEs, you can&rsquo;t do this.<br/><br/>
+
+So, I used <a href="https://twitter.com/#!/alanfgates">Alan Gates&rsquo;</a> awesome book <a href="http://www.amazon.com/gp/product/1449302645/ref=as_li_ss_tl?ie=UTF8&amp;tag=datasynd-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1449302645">Programming Pig</a> as a guide, and added bags and tuples to MongoStorage (part of <a href="https://github.com/mongodb/mongo-hadoop">mongo-hadoop</a>).<br/><br/>
+
+The gist is here: <a href="https://gist.github.com/1546174">https://gist.github.com/1546174</a><br/><br/>
+
+The pull request is here: <a href="https://github.com/mongodb/mongo-hadoop/pull/29">https://github.com/mongodb/mongo-hadoop/pull/29</a></p>
+</body>
+</html>

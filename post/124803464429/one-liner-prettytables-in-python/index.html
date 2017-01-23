@@ -1,0 +1,57 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+One-liner pretty tables in Python: print Table([&ldquo;Column 1&rdquo;,&ldquo;Column 2&rdquo;, &hellip;],[[&ldquo;Row 1&rdquo;, 1.0, &hellip;],&hellip;]) 
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">prettytable</span> <span style="color: #008800; font-weight: bold">import</span> PrettyTable
+
+<span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Table</span>:
+  <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, columns, data):
+    <span style="color: #008800; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">not</span> <span style="color: #007020">len</span>(columns):
+      <span style="color: #008800; font-weight: bold">raise</span> <span style="background-color: #fff0f0">"Table must have at least one column"</span>
+    <span style="color: #008800; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">not</span> <span style="color: #007020">len</span>(data):
+      <span style="color: #008800; font-weight: bold">raise</span> <span style="background-color: #fff0f0">"Table must have at least one row"</span>
+    <span style="color: #007020">self</span><span style="color: #333333">.</span>_columns <span style="color: #333333">=</span> columns
+    <span style="color: #007020">self</span><span style="color: #333333">.</span>_data <span style="color: #333333">=</span> data    
+    <span style="color: #007020">self</span><span style="color: #333333">.</span>_p <span style="color: #333333">=</span> PrettyTable(<span style="color: #007020">self</span><span style="color: #333333">.</span>_columns)
+    
+    <span style="color: #008800; font-weight: bold">for</span> row <span style="color: #000000; font-weight: bold">in</span> data:
+      <span style="color: #007020">self</span><span style="color: #333333">.</span>_p<span style="color: #333333">.</span>add_row(row)
+  
+    <span style="color: #007020">self</span><span style="color: #333333">.</span>_p<span style="color: #333333">.</span>padding_width <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+    <span style="color: #007020">self</span><span style="color: #333333">.</span>_p<span style="color: #333333">.</span>float_format<span style="color: #333333">=</span><span style="background-color: #fff0f0">'.2f'</span>
+    <span style="color: #008800; font-weight: bold">for</span> key <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>_p<span style="color: #333333">.</span>align<span style="color: #333333">.</span>keys():
+      <span style="color: #007020">self</span><span style="color: #333333">.</span>_p<span style="color: #333333">.</span>align[key] <span style="color: #333333">=</span> <span style="background-color: #fff0f0">'r'</span>
+  
+  <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__str__</span>(<span style="color: #007020">self</span>):
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">str</span>(<span style="color: #007020">self</span><span style="color: #333333">.</span>_p)
+</pre></td></tr></table></div>
+</body>
+</html>

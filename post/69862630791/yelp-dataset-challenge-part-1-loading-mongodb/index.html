@@ -1,0 +1,19 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+I&rsquo;m building an analytic application around the <a href="http://www.yelp.co.uk/dataset_challenge">Yelp Dataset Challenge</a>, and was pleasantly surprised at how easy it is to load JSON into MongoDB.
+
+<pre><code># Import businesses, users, reviews and checkins
+mongoimport --db yelp --collection businesses yelp_phoenix_academic_dataset/yelp_academic_dataset_business.json
+mongoimport --db yelp --collection users yelp_phoenix_academic_dataset/yelp_academic_dataset_user.json
+mongoimport --db yelp --collection reviews yelp_phoenix_academic_dataset/yelp_academic_dataset_review.json
+mongoimport --db yelp --collection checkins yelp_phoenix_academic_dataset/yelp_academic_dataset_checkin.json
+</code></pre>
+</body>
+</html>

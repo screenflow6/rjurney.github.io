@@ -1,0 +1,25 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+I often get lost among terminals in OS X.  I forget which is which, or I have trouble resuming a session the next day after a break.  To reduce this &lsquo;contextual overhead&rsquo;, it is nice to name terminals.<br/><br/>
+
+Put this in <code>~/.bash_profile</code>:
+
+<pre><code>function settitle() { echo -n -e "\033]0;$1\007"; }
+export -f settitle</code></pre>
+
+Now to set the title of the current terminal:
+
+<pre><code>settitle 'Apache Pig'</code></pre>
+
+And wallah:<br/><br/><center><img src="https://68.media.tumblr.com/tumblr_lx3btk1eXY1qdyhha.png"/></center><br/>
+
+High fives to <a href="http://www.tech-recipes.com/rx/705/mac-os-x-change-the-terminal-window-title/">this</a> and <a href="http://hints.macworld.com/article.php?story=20060502160527780">this</a>.
+</body>
+</html>

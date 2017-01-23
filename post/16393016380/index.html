@@ -1,0 +1,18 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<p>Thanks to <a href="https://twitter.com/#!/joecrobak">Joe Crobak</a> for the tip, I have patched the Python library for Avro to build under Mac OS X by removing its python-snappy dependency.  This has been bugging a lot of people, and while the patch removes snappy compression&hellip; I have no idea what that is, and I don&rsquo;t need it :)</p>
+
+<p>The patch is available here: <a href="https://issues.apache.org/jira/browse/AVRO-981">AVRO-981</a>.</p>
+
+<p>To build Avro, you&rsquo;ll need to clone trunk from <a href="https://github.com/apache/avro.git">https://github.com/apache/avro.git</a>, apply the patch and then build and install the python library.</p>
+
+<p>Update: it seems the problem was that Snappy is a dependency.  Install it from here: <a href="http://code.google.com/p/snappy/">http://code.google.com/p/snappy/</a> and python-snappy and python avro should work :)</p>
+</body>
+</html>
