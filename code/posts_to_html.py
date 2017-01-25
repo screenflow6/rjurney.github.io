@@ -6,7 +6,7 @@ from jinja2 import Template
 f = open('posts.json')
 posts = json.loads(f.read())
 
-template = open('post.html').read()
+template = open('blog.html').read()
 
 for i, post in enumerate(posts):
   
@@ -17,6 +17,11 @@ for i, post in enumerate(posts):
   id = post['id']
   slug = post['slug']
   url = post['post_url']
+  title = None
+  try:
+    title = post['title']
+  except:
+    title = post['summary']
   
   print("Trying to parse {}: {}".format(i, url))
   
@@ -45,9 +50,11 @@ for i, post in enumerate(posts):
   full_file = open(full_html_path, "w")
   
   t = Template(template)
-  output = t.render(body=body)
+  output = t.render(body=body, title=title)
   
   base_file.write(output)
+  base_file.close()
   full_file.write(output)
+  full_file.close()
   
   print("Write {} and {} with post...".format(base_html_path, full_html_path))

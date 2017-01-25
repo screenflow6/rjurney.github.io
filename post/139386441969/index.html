@@ -1,13 +1,47 @@
-<html>
-<head>
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://adsli.com/html/datasyndrome-1/ -->
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-</head>
-<body>
-<p>I am vectorizing some features in sklearn, and I have run into a problem. DictVectorizer works well if your data can be encoded into one dict per item. What if your items can have two values of the same column? 
+		<title>Data Syndrome</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- CSS -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/blog.style.css">
+
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="/img/favicon.png" type="image/png">
+		<link rel="icon" href="/img/favicon.png" type="image/png">
+        
+	</head>
+
+    <body tcap-name="mainman">
+		<header>
+			<div class="header-top">
+				<div class="container">
+					<div class="header-logo text-center">
+						<a href="/"><img src="/img/header-logo.png" class="img-responsive" alt="header-logo"></a>
+					</div>
+				</div>
+			</div>
+			<div class="header-bottom text-center">
+				<div class="container">
+					<h3>MultiDictVectorizer for sklearn?</h3>
+					<div class="bottom-img">
+						<img src="/img/bottom-img.png" class="img-responsive" alt="bottom-img">
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="holder">
+			<div class="container">
+				<div class="main-contents">
+					<p>I am vectorizing some features in sklearn, and I have run into a problem. DictVectorizer works well if your data can be encoded into one dict per item. What if your items can have two values of the same column? 
 
 For instance, DictVectorizer works fine on an item like this one:
 
@@ -26,5 +60,35 @@ What is one supposed to do in this situation? Do I need to create my own MultiDi
 <p>To answer my own question, I am adding support for lists to DictVectorizer, or creating a new class MultiDictVectorizer that does so. From StackOverflow:</p>
 
 <bq>DictVectorizer can&rsquo;t handle multiple values per key, so I am adding this ability to it. If the pull is accepted, this will be a part of sklearn. If not, I will subclass DictVectorizer in MultiDictVectorizer and will release a package for this class.<br/><br/><a href="https://github.com/scikit-learn/scikit-learn/pull/6369">Pull request at Github</a><br/><a href="https://github.com/scikit-learn/scikit-learn/issues/6368">Issue in sklearn Github project</a></bq>
-</body>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="container">	
+				<div class="foot-social text-center">
+					<ul class="list-inline">
+						<li><a href="http://facebook.com/jurney"><img src="/img/share-1.png" class="img-responsive" target="_blank"></a></li>
+						<li><a href="http://twitter.com/rjurney"><img src="/img/share-2.png" class="img-responsive" target="_blank"></a></li>
+						<li><a href="http://linkedin.com/in/russelljurney"><img src="/img/share-3.png" class="img-responsive" target="_blank"></a></li>
+						<li><a href="https://medium.com/@rjurney"><img src="/img/share-4.png" class="img-responsive" target="_blank"></a></li>
+						<li><a href="/people.html"><img src="/img/share-5.png" class="img-responsive" target="_blank"></a></li>
+					</ul>
+				</div>
+				<div class="foot-menu text-center">
+					<ul class="list-inline">
+						<li><a href="/">Home</a></li>
+						<li><a href="/people.html">People</a></li>
+						<li><a href="/book.html">Book</a></li>
+					</ul>
+				</div>
+				<div class="foot-copy text-center">
+					<p>© Copyright 2017  Data Syndrome · <a href="/">Privacy Policy</a> ·</p>
+				</div>
+			</div>
+		</footer>
+        <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/custom.js"></script>
+
+	</body>
 </html>

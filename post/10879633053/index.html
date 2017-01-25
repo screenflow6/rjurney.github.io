@@ -1,13 +1,47 @@
-<html>
-<head>
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://adsli.com/html/datasyndrome-1/ -->
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-</head>
-<body>
-<p>Note: if you like this post, you&rsquo;ll want to learn more about the <a target="_blank" href="http://tinkerpop.com">Tinkerpop</a> stack.</p><p>A few months ago, my health improved for a bit, and I was able to do some thinking about email.  I believe your most valuable, <strong>untapped</strong> social network is in your <strong>inbox</strong>.  I thought about competing with Xobni, Rapportive, etc. from a more analytics-intensive, social network analysis perspective.  More than that, I wanted to create a new kind of social network based on a new kind of sharing.</p>
+		<title>Data Syndrome</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- CSS -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/blog.style.css">
+
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="/img/favicon.png" type="image/png">
+		<link rel="icon" href="/img/favicon.png" type="image/png">
+        
+	</head>
+
+    <body tcap-name="mainman">
+		<header>
+			<div class="header-top">
+				<div class="container">
+					<div class="header-logo text-center">
+						<a href="/"><img src="/img/header-logo.png" class="img-responsive" alt="header-logo"></a>
+					</div>
+				</div>
+			</div>
+			<div class="header-bottom text-center">
+				<div class="container">
+					<h3>Thinking about email: Implied social networks in the inbox</h3>
+					<div class="bottom-img">
+						<img src="/img/bottom-img.png" class="img-responsive" alt="bottom-img">
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="holder">
+			<div class="container">
+				<div class="main-contents">
+					<p>Note: if you like this post, you&rsquo;ll want to learn more about the <a target="_blank" href="http://tinkerpop.com">Tinkerpop</a> stack.</p><p>A few months ago, my health improved for a bit, and I was able to do some thinking about email.  I believe your most valuable, <strong>untapped</strong> social network is in your <strong>inbox</strong>.  I thought about competing with Xobni, Rapportive, etc. from a more analytics-intensive, social network analysis perspective.  More than that, I wanted to create a new kind of social network based on a new kind of sharing.</p>
 <p>So I set about slurping gmail and yahoo via <a target="_blank" href="http://code.google.com/apis/gmail/oauth/">OAuth IMAP</a>.  To grab a few emails is trivial.  To reliably get the entire mailbox - often 100s of thousands of messages, is actually hard.  Many exceptions can crop at many levels of the stack, and you&rsquo;ve got to catch all you can and resume on failure.  And who the fuck knew that Ruby has Error in addition to Exception as a base level Error/Exception thingy?  Not me, for about a week of debugging.</p>
 <ul><li>Slurping data can be exhaustively time-consuming.  Plan for it.</li>
 <li>Consider - maybe you don&rsquo;t need all the data to ship your first version.</li>
@@ -25,5 +59,35 @@
 <p>Then my pain got bad again and I fell on my ass.  I have an application up at <a href="http://kontexa.com">http://kontexa.com</a> that will OAuth into your gmail.  If I fire off a command, I can make you a poster and with a little fine tuning, email it to you, or print it and mail it in one of those tubes taking up so much space in my office.  Thats as far as I got before I flared.</p>
 <p>Now I&rsquo;m able to work part time, and I need to pay the bills&hellip; you can&rsquo;t part-time a startup.  I got a part-time gig with a very cool company.  So this whole thing is shelved.  But this is the direction of what I was doing.  I thought I would share.</p>
 <p>Can you guess the cleverness from the picture above?</p>
-</body>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="container">	
+				<div class="foot-social text-center">
+					<ul class="list-inline">
+						<li><a href="http://facebook.com/jurney"><img src="/img/share-1.png" class="img-responsive" target="_blank"></a></li>
+						<li><a href="http://twitter.com/rjurney"><img src="/img/share-2.png" class="img-responsive" target="_blank"></a></li>
+						<li><a href="http://linkedin.com/in/russelljurney"><img src="/img/share-3.png" class="img-responsive" target="_blank"></a></li>
+						<li><a href="https://medium.com/@rjurney"><img src="/img/share-4.png" class="img-responsive" target="_blank"></a></li>
+						<li><a href="/people.html"><img src="/img/share-5.png" class="img-responsive" target="_blank"></a></li>
+					</ul>
+				</div>
+				<div class="foot-menu text-center">
+					<ul class="list-inline">
+						<li><a href="/">Home</a></li>
+						<li><a href="/people.html">People</a></li>
+						<li><a href="/book.html">Book</a></li>
+					</ul>
+				</div>
+				<div class="foot-copy text-center">
+					<p>© Copyright 2017  Data Syndrome · <a href="/">Privacy Policy</a> ·</p>
+				</div>
+			</div>
+		</footer>
+        <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/custom.js"></script>
+
+	</body>
 </html>
