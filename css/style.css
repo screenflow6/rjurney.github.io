@@ -68,9 +68,10 @@ header .home-form-all .form-in .form-control { background-color: #fff;background
 .amazon {  position: relative;  top: 21px;}
 .book-bottom-holder { padding:0px 0 75px; }
 .book-bottom-holder .row.sp { padding:35px 25px; background:#fff; }
-.book-tab-content p { color:#192853; font-size:18px; font-family:'Roboto'; background:url(img/others/square.png) no-repeat 0 10px; padding-left:25px; margin-bottom:15px;  }
-.book-tab-content p span { color:#999999; padding-left:35px; }
-
+.book-tab-content .blue { color:#192853; font-size:18px; font-weight:400; font-family:'Roboto'; background:url(img/others/square.png) no-repeat 0 18px; padding-left:20px; margin-bottom:15px;  }
+.book-tab-content .grey { color:#999999;   font-size:18px; font-weight:400; font-family:'Roboto'; }
+.book-tab-content tr th { border:none !important; }
+.book-tab-content p { color:#192853; font-size:18px; font-weight:400; font-family:'Roboto'; background:url(img/others/square.png) no-repeat 0 18px; padding-left:20px; margin-bottom:15px;  }
 
 
 /*footer*/
