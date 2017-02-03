@@ -68,10 +68,58 @@ header .home-form-all .form-in .form-control { background-color: #fff;background
 .amazon {  position: relative;  top: 21px;}
 .book-bottom-holder { padding:0px 0 75px; }
 .book-bottom-holder .row.sp { padding:35px 25px; background:#fff; }
-.book-tab-content .blue { color:#192853; font-size:18px; font-weight:400; font-family:'Roboto'; background:url(img/others/square.png) no-repeat 0 18px; padding-left:20px; margin-bottom:15px;  }
+.book-tab-content .blue { color:#192853; font-size:18px; font-weight:400; font-family:'Roboto'; padding-left:20px; margin-bottom:15px;  }
 .book-tab-content .grey { color:#999999;   font-size:18px; font-weight:400; font-family:'Roboto'; }
 .book-tab-content tr th { border:none !important; }
 .book-tab-content p { color:#192853; font-size:18px; font-weight:400; font-family:'Roboto'; background:url(img/others/square.png) no-repeat 0 18px; padding-left:20px; margin-bottom:15px;  }
+
+
+/* video-training */
+
+.btn.bottom-video-btn { background-color: #34c6ce;  border-radius: 50px;  color: #fff;  font-size: 20px; font-family:"AvenirNextLTProRegular"; padding: 10px 30px !important;}
+.video-training-holder { box-shadow: 0 3px 5px 0 rgba(221, 221, 221, 1) inset; background: rgba(0, 0, 0, 0) url("img/others/body-bg.jpg") no-repeat scroll 0 0 / cover ; padding: 70px 0px 80px;}
+.video-training-holder .main-section .main-contents .top-contents h3 { color: #182752; font-size: 34px; margin-top: 0; font-family:"AvenirNextLTProRegular"; }
+.video-training-holder .main-section .main-contents .top-contents h5 { color: #5fbfc9; font-family: "Open Sans"; font-size: 16px; line-height:1.5;}
+.video-training-holder .main-section .main-contents .top-contents > p { color: #767676; font-family: "Open Sans"; font-size: 16px; line-height: 1.8; padding: 20px 0; text-align:justify; }
+.video-training-holder .main-section .main-contents .list-contents { padding-top: 20px; }
+.video-training-holder .main-section .main-contents .list-contents ul li {background: rgba(0, 0, 0, 0) url("img/others/list-arrow.png") no-repeat scroll left 6px; color: #8f8f8f; font-family: "Open Sans"; font-size: 16px; padding: 0 0 5px 16px; }
+
+.video-training-holder .main-section .video-contents .video-frame  iframe { -webkit-box-shadow: 0px 0px 8px 0px rgba(185,183,183,1); -moz-box-shadow: 0px 0px 8px 0px rgba(185,183,183,1); box-shadow: 0px 0px 8px 0px rgba(185,183,183,1); padding: 10px; height: 443px; }
+.video-training-holder .main-section .video-contents .video-btn { margin-top: 30px; text-align: center; }
+.video-training-holder .main-section .video-contents .video-btn a i { padding-left: 10px; }
+
+
+/* corporate-training */
+
+.corporate-holder { background:url(../img/corporate-bg.jpg) no-repeat scroll 0 0; box-shadow: 0 3px 5px 0 rgba(221, 221, 221, 1) inset; background-size: cover; padding: 20px 0px; }
+.corporate-holder .corporate-heading  { padding: 25px 0px; }
+.corporate-holder .corporate-heading > h3 { color: #182752; font-size: 34px; font-family:"AvenirNextLTProRegular"; }
+.tab-holder ul.tabs { height: 50px; }
+.tab-holder ul.tabs li { font-size: 22px; color:#fff; height: 50px; padding: 10px 20px; border-radius: 2px; font-family:"AvenirNextLTProRegular"; }
+.tab-holder ul.tabs li.list-1 { background-color:#354368; border: 1px solid #354368; } 
+.tab-holder ul.tabs li.list-1::after { background: rgba(0, 0, 0, 0) url("img/others/list-overlay-1.png") no-repeat scroll center center; content: ""; display: inline-block; height: 16px; left: 0; position: absolute; right: 0; top: 46px; width: 100%; z-index: 100; }
+.tab-holder ul.tabs li.list-2 { background-color:#32b3e0; border: 1px solid #32b3e0; margin-left: 10px; }
+.tab-holder ul.tabs li.list-2::after { background: rgba(0, 0, 0, 0) url("img/others/list-overlay-2.png") no-repeat scroll center center; content: "";  display: inline-block; height: 16px; left: 0; position: absolute; right: 0; top: 46px; width: 100%; z-index: 100; }
+.corporate-holder .tab-holder .agile-heading > h3 { color: #354368; font-size: 24px; font-family:"AvenirNextLTProRegular"; } 
+.corporate-holder .tab-holder .common-box { padding-top: 30px; }
+.corporate-holder .tab-holder .common-box.expected-holder,.course-overview-holder { padding-top: 10px !important; }
+.corporate-holder .tab-holder .common-box  h5 { color: #5fbfc9; font-size: 22px; font-family:"AvenirNextLTProRegular"; }
+.corporate-holder .tab-holder .common-box p, li { color: #767676; font-family: "Open Sans"; font-size: 17px; line-height: 1.6; text-align: justify; overflow: visible !important; }
+.corporate-holder .tab-holder .common-box  li { padding-bottom: 10px; }
+.corporate-holder .tab-holder .common-box.learning-promise-holder ul li { background: rgba(0, 0, 0, 0) url("img/others/corporate-list-arrow.png") no-repeat scroll left 8px; padding-left: 20px; } 
+
+
+/*Cannabidiol (CBD)*/
+.text-center img { display: inline-block; }
+header .header-top-cbd { background-color: #f8f8f8; padding: 25px 0; }
+.header-bottom-cbd.text-center { padding: 40px 0 30px; }
+header .header-bottom-cbd h3 { color: #1a2954; font-size: 28px; text-transform: uppercase; font-weight: 600; font-family:'Open Sans'; }
+.cbd-holder .cbd-contents { padding-bottom: 50px; }
+.cbd-holder .cbd-contents h5 { color: #24aec5; font-size: 16px; font-weight: 700; font-family:'Open Sans'; }
+.cbd-holder .cbd-contents p { color: #5f6061; font-size: 16px; line-height: 1.8; text-align:justify; font-family:'Open Sans'; }
+.cbd-holder .main { color: #5f6061; font-size: 16px; line-height: 1.8; } 
+.cbd-holder .cbd-contents p img { border: 2px solid #f7f7f7; float: left; margin: 0 20px 10px 0; }
+.cbd-holder .cbd-contents  h6 { color: #1a2954; font-size: 16px; font-family:'Open Sans'; }
 
 
 /*footer*/
@@ -85,156 +133,116 @@ footer .foot-copy p a { color:#7d7d7d; text-decoration:none; }
 
 /*Resposnive*/
 
+/* video-training */
+@media screen and (max-width:1365px) {
+header .header-top-all.inner { 	border-bottom: 1px solid #cfcfcf;  	padding: 15px 0 10px; }
+.video-training-holder .main-section .main-contents .top-contents h5 { 	font-size: 15px; }
+.video-training-holder .main-section .main-contents .top-contents > p { padding: 10px 0; }
+.video-training-holder .main-section .main-contents .list-contents ul li { font-size: 14px; }
+.video-training-holder .main-section .video-contents .video-frame iframe { height: 387px; }
+}
+
 @media (max-width: 1200px) 
 
 {
-	header .header-top-all.inner {  border-bottom: 1px solid #cfcfcf;  padding: 15px 0 10px;}
-	
-	.training-row h3 {  color: #192853;  font-family: "Roboto";  font-size: 31px;  font-weight: 300;  margin-top: 0;}
-	.blog-text .row.sp h4 {  margin-left: 20px;}
-	
-	/*inner*/
-	.mail-list-holder h3 {  color: #383838;  font-family: "Roboto";  font-size: 22px;  font-weight: 400;  margin-top: 10px;}
+header .header-top-all.inner {  border-bottom: 1px solid #cfcfcf;  padding: 15px 0 10px;}
+
+.training-row h3 {  color: #192853;  font-family: "Roboto";  font-size: 31px;  font-weight: 300;  margin-top: 0;}
+.blog-text .row.sp h4 {  margin-left: 20px;}
+
+/*inner*/
+.mail-list-holder h3 {  color: #383838;  font-family: "Roboto";  font-size: 22px;  font-weight: 400;  margin-top: 10px;}
 }
 
 @media (max-width: 1023px) 
 
 {
-	header .header-top-all.inner {  border-bottom: 1px solid #cfcfcf;  padding: 15px 0 3px;}
-	header .home-form-all h4 {  color: #383838;  font-family: "Open Sans";  font-size: 21px;  margin: 0;  padding-top: 11px;}
-	header .home-form-all .form-in .btn-default {  background: #009367 none repeat scroll 0 0;  border-radius: 5px;  color: #fff;  font-family: "Roboto";  font-size: 14px;  font-weight: 400;  padding: 14px 17px;}
-	
-	.blog-text h4 {  color: #192853;  font-family: "Roboto";  font-size: 21px;  padding-top: 10px;}
-	
-	/*inner*/
-	.mail-form .btn-default {  background: #192853 none repeat scroll 0 0;  border: medium none;  color: #fff;  font-family: "Roboto";  font-size: 15px;  padding: 14px 25px;  width: 180px;}
-	
+header .header-top-all.inner {  border-bottom: 1px solid #cfcfcf;  padding: 15px 0 3px;}
+header .home-form-all h4 {  color: #383838;  font-family: "Open Sans";  font-size: 21px;  margin: 0;  padding-top: 11px;}
+header .home-form-all .form-in .btn-default {  background: #009367 none repeat scroll 0 0;  border-radius: 5px;  color: #fff;  font-family: "Roboto";  font-size: 14px;  font-weight: 400;  padding: 14px 17px;}
+
+.blog-text h4 {  color: #192853;  font-family: "Roboto";  font-size: 21px;  padding-top: 10px;}
+
+/*inner*/
+.mail-form .btn-default {  background: #192853 none repeat scroll 0 0;  border: medium none;  color: #fff;  font-family: "Roboto";  font-size: 15px;  padding: 14px 25px;  width: 180px;}
+
+/* video-training */
+header .navbar-nav > li > a { font-size: 16px; padding: 15px; }
+.video-training-holder .main-section .main-contents .top-contents h3 { font-size: 26px;	}
+.video-training-holder .main-section .main-contents .top-contents > p { font-size: 14px; line-height: 1.6; 	}
+.video-training-holder .main-section .video-contents .video-frame iframe { height: 325px; }
 }
 
 @media (max-width: 767px) 
 
 {
-	header .home-form-all .col-sm-5ths.sp {  padding: 0 15px;}
-	header .home-form-all h4 {  color: #383838;  font-family: "Open Sans";  font-size: 26px;  margin: 0;  padding-top: 2px;}
-	header .header-top-all.inner {  border-bottom: 1px solid #cfcfcf;  padding: 15px 0 8px;}
-	header .logo .img-responsive {  width: 200px; z-index:999; position:relative;}
-	
-	.training-row h3 {  color: #192853;  font-family: "Roboto";  font-size: 29px;  font-weight: 300;  margin-top: 0;}
-	.data-holder h3 {  color: #192853;  font-family: "Roboto";  font-size: 26px;  font-weight: 300;}
-	.data-content {   padding-right: 0;  border: none;}
-	
-	footer p { margin:0; color:#7d7d7d; font-size:13px; font-family:'Open Sans';  }
-	footer .foot-copy p a { margin:0; color:#7d7d7d; font-size:13px; font-family:'Open Sans'; text-decoration:none !important;  }
-	
-	/*inner*/
-	.prince-profile-holder h3 { color:#192853; font-size:36px; font-family: "Roboto" ;margin-top:15px; }
-	.prince-profile-holder ul li a {  color: #999999;  font-family: "Roboto";  font-size: 14px;  line-height: 28px;  text-decoration: none;}
-	.prince-profile-holder h3 {  color: #192853;  font-family: "Roboto";  font-size: 26px;  margin-top: 15px;}
-	.mail-form .input-group-btn {  display: block !important; padding-top:15px !important;}
-	.mail-form .form-control { background-color: #cbf2ff;background-image: none;border: 1px solid #192853;border-radius: 0px;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;color: #555;display: block;font-size: 14px;height: 50px;ine-height: 1.42857;adding: 6px 12px;transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;width: 100%;font-family: 'Open Sans'; margin-bottom:15px; }
-	.mail-form .btn-default { background:#192853; font-size:15px; color:#fff; padding:14px 25px; width:150px; border:none; font-family: "Roboto"; display:block; margin-top:15px ; border-radius:0px; }
-	.mail-list-holder .input-group {  border-collapse: separate;  display: table;  left: 0;  position: relative;  width: 100%;}
-	.mail-list-holder h3 {  color: #383838;  font-family: "Roboto";  font-size: 27px;  font-weight: 400;  margin-top: 0;}
-	.book-top-holder h3 {  color: #192853;  font-family: "Roboto";  font-size: 26px;  font-weight: 400;  margin-top: 20px;}
-	.book-top-holder .btn-book1 { background:#192853; font-size:13px; color:#fff; padding:10px 10px;  font-family: "Roboto"; }
-	.book-top-holder .btn-book2 { background:#009a51; font-size:13px; color:#fff; padding:10px 10px;  font-family: "Roboto"; }
-	.book-top-holder .btn-book3 { background:#000000; font-size:13px; color:#fff; padding:10px 10px;  font-family: "Roboto"; }
-	.book-bottom-holder .row.sp { padding:15px 0; background:#fff; }
-	
-}
+header .home-form-all .col-sm-5ths.sp {  padding: 0 15px;}
+header .home-form-all h4 {  color: #383838;  font-family: "Open Sans";  font-size: 26px;  margin: 0;  padding-top: 2px;}
+header .header-top-all.inner {  border-bottom: 1px solid #cfcfcf;  padding: 15px 0 8px;}
+header .logo .img-responsive {  width: 200px; z-index:999; position:relative;}
 
-.book-tab-content ul.tabs {
-	margin: 0;
-	padding: 0;
-	float: left;
-	list-style: none;
-	height: 52px;
-	border-bottom: 1px solid #dedede;
-	width: 100%;
-}
+.training-row h3 {  color: #192853;  font-family: "Roboto";  font-size: 29px;  font-weight: 300;  margin-top: 0;}
+.data-holder h3 {  color: #192853;  font-family: "Roboto";  font-size: 26px;  font-weight: 300;}
+.data-content {   padding-right: 0;  border: none;}
 
-.book-tab-content ul.tabs li {
-	float: left;
-	margin: 0;
-	cursor: pointer;
-	padding: 10px 21px;
-	height: 51px;
-	border-left:1px solid transparent;
-	border-right:1px solid transparent;
-	border-top:2px solid transparent;
-	
-	background-color: #fefefe;
-	color: #999999;
-	overflow: hidden;
-	position: relative;
-	font-size:24px; 
-	font-family: "Roboto";
+footer p { margin:0; color:#7d7d7d; font-size:13px; font-family:'Open Sans';  }
+footer .foot-copy p a { margin:0; color:#7d7d7d; font-size:13px; font-family:'Open Sans'; text-decoration:none !important;  }
+
+/*inner*/
+.prince-profile-holder h3 { color:#192853; font-size:36px; font-family: "Roboto" ;margin-top:15px; }
+.prince-profile-holder ul li a {  color: #999999;  font-family: "Roboto";  font-size: 14px;  line-height: 28px;  text-decoration: none;}
+.prince-profile-holder h3 {  color: #192853;  font-family: "Roboto";  font-size: 26px;  margin-top: 15px;}
+.mail-form .input-group-btn {  display: block !important; padding-top:15px !important;}
+.mail-form .form-control { background-color: #cbf2ff;background-image: none;border: 1px solid #192853;border-radius: 0px;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;color: #555;display: block;font-size: 14px;height: 50px;ine-height: 1.42857;adding: 6px 12px;transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;width: 100%;font-family: 'Open Sans'; margin-bottom:15px; }
+.mail-form .btn-default { background:#192853; font-size:15px; color:#fff; padding:14px 25px; width:150px; border:none; font-family: "Roboto"; display:block; margin-top:15px ; border-radius:0px; }
+.mail-list-holder .input-group {  border-collapse: separate;  display: table;  left: 0;  position: relative;  width: 100%;}
+.mail-list-holder h3 {  color: #383838;  font-family: "Roboto";  font-size: 27px;  font-weight: 400;  margin-top: 0;}
+.book-top-holder h3 {  color: #192853;  font-family: "Roboto";  font-size: 26px;  font-weight: 400;  margin-top: 20px;}
+.book-top-holder .btn-book1 { background:#192853; font-size:13px; color:#fff; padding:10px 10px;  font-family: "Roboto"; }
+.book-top-holder .btn-book2 { background:#009a51; font-size:13px; color:#fff; padding:10px 10px;  font-family: "Roboto"; }
+.book-top-holder .btn-book3 { background:#000000; font-size:13px; color:#fff; padding:10px 10px;  font-family: "Roboto"; }
+.book-bottom-holder .row.sp { padding:15px 0; background:#fff; }
+
+
+/* video-training */
+.navbar-toggle .icon-bar { background-color:#202020; }
+.video-training-holder { padding: 30px 0; }
+.video-training-holder .main-section .main-contents .top-contents h3 { font-size: 22px;	}
+.video-training-holder .main-section .video-contents { padding-top: 20px; }	
+.video-training-holder .main-section .video-contents .video-frame iframe { height: 100%; width: 100%; }
+
+/* corporate-training */
+.corporate-holder {	padding: 20px 0; }
+.corporate-holder .corporate-heading > h3 {	font-size: 33px; }
+.tab_content { padding: 20px; }
+.corporate-holder .tab-holder .agile-heading > h3 {	font-size: 23px; }
+.tab-holder ul.tabs li.list-2 {	margin-left: 0px; }
+.corporate-holder .tab-holder .common-box p, li { text-align: left;	}
+.tab-holder .tab_container h3.d_active::after { background: rgba(0, 0, 0, 0) url("img/others/list-overlay-1.png") no-repeat scroll center center !important; content: ""; display: inline-block; height: 16px; left: 0;	position: relative;	right: 0;	top: 24px;	width: 100%; z-index: 100;	}
+.tab-holder .tab_container h3.tab_drawer_heading::after {	background: rgba(0, 0, 0, 0) url("img/others/list-overlay-2.png") no-repeat scroll center center; content: ""; display: inline-block; height: 16px;	left: 0; position: relative;	right: 0; top: 24px; width: 100%; z-index: 100; }
+
+/*Cannabidiol (CBD)*/
+header .header-bottom-cbd h3 { font-size: 19px; }
 }
 
 
 
-.book-tab-content ul.tabs li:hover {
-	background-color: #fff;
-	color: #192853;
-	border-bottom: 1px solid #fff;
-	display: block;
-	border-left:1px solid #dddddd;
-	border-right:1px solid #dddddd;
-	border-top:2px solid #192853;
-	height:52px;
-}
 
-.book-tab-content ul.tabs li.active {
-	background-color: #fff;
-	color: #192853;
-	border-bottom: 1px solid #fff;
-	display: block;
-	border-left:1px solid #dddddd;
-	border-right:1px solid #dddddd;
-	border-top:2px solid #192853;
-	height:52px;
-}
 
-.book-tab-content .tab_container {
-	border: 1px solid #dedede;
-	border-top: none;
-	clear: both;
-	float: left;
-	width: 100%;
-	background: #fff;
-	overflow: auto;
-}
 
-.book-tab-content .tab_content {
-	padding: 20px;
-	display: none;
-}
+/* Tab properties */
 
+
+.book-tab-content ul.tabs { margin: 0; padding: 0; float: left; list-style: none; height: 52px; border-bottom: 1px solid #dedede; width: 100%; }
+.book-tab-content ul.tabs li { float: left; margin: 0; cursor: pointer; padding: 10px 21px; height: 51px; border-left:1px solid transparent; border-right:1px solid transparent; border-top:2px solid transparent;  background-color: #fefefe; color: #999999; overflow: hidden; position: relative; font-size:24px;  font-family: "Roboto"; }
+.book-tab-content ul.tabs li:hover { background-color: #fff; color: #192853; border-bottom: 1px solid #fff; display: block; border-left:1px solid #dddddd; border-right:1px solid #dddddd; border-top:2px solid #192853; height:52px; }
+.book-tab-content ul.tabs li.active { background-color: #fff; color: #192853; border-bottom: 1px solid #fff; display: block; border-left:1px solid #dddddd; border-right:1px solid #dddddd; border-top:2px solid #192853; height:52px; }
+.book-tab-content .tab_container { border: 1px solid #dedede; border-top: none; clear: both; float: left; width: 100%; background: #fff; overflow: auto; }
+.book-tab-content .tab_content { padding: 20px; display: none; }
 .book-tab-content .tab_drawer_heading { display: none; }
 
 @media screen and (max-width: 767px) {
-	.book-tab-content .tabs {
-		display: none;
-	}
-	.book-tab-content .tab_drawer_heading {
-		background-color: #fff !important;
-		color: #cdcdcd;
-		font-family:'Roboto';
-		border-top: 1px solid #192853;
-		margin: 0;
-		padding: 5px 20px;
-		display: block;
-		cursor: pointer;
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-		
-	}
-	.book-tab-content .d_active {
-		background-color: #666;
-		color: #192853;
-	}
+.book-tab-content .tabs { display: none; }
+.book-tab-content .tab_drawer_heading { background-color: #fff !important;	color: #cdcdcd;	font-family:'Roboto';	border-top: 1px solid #192853;	margin: 0;	padding: 5px 20px;	display: block;	cursor: pointer;	-webkit-touch-callout: none;	-webkit-user-select: none;	-khtml-user-select: none;	-moz-user-select: none;	-ms-user-select: none;	user-select: none;	}
+.book-tab-content .d_active { 	background-color: #666;	color: #192853;	}
 }
