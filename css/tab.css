@@ -15,15 +15,12 @@ ul.tabs li {
 	padding: 0px 21px;
 	height: 31px;
 	line-height: 31px;
-	border-top: 1px solid #333;
-	border-left: 1px solid #333;
-	border-bottom: 1px solid #333;
-	background-color: #666;
 	color: #ccc;
 	overflow: hidden;
 	position: relative;
+	background-color:#32b3e0;
+	border: 1px solid #32b3e0; margin-left: 10px;
 }
-
 .tab_last { border-right: 1px solid #333; }
 
 ul.tabs li:hover {
