@@ -77,8 +77,9 @@
 				</div>
 				<div class="tab-holder">
 					<ul class="tabs">
-						<li class="active list-1" rel="tab1">Agile Data Science</li>
-						<li class="list-2" rel="tab2">Realtime Predictive Analytics</li>
+						<li id="tab1header" class="active list-1" rel="tab1">Agile Data Science</li>
+						<li id="tab2header" class="list-2" rel="tab2">Introduction to PySpark</li>
+						<li id="tab3header" class="list-2" rel="tab3">Realtime Predictive Analytics</li>
 					</ul>
 					<div class="tab_container">
 						<h3 class="d_active tab_drawer_heading" rel="tab1">Agile Data Science</h3>
@@ -158,7 +159,7 @@
 								<h5>Prerequisites:</h5>
 								<p>Students should be fluent programmers in at least one language, preferably Python and
 									with some experience in Javascript. Exposure to data analysis on some level is required,
-									but that might be limited to SQL. We will provide a pre-test which students should
+									but that might be limited to SQL. We can provide a pre-test which students should
 									pass to benefit optimally from the course.</p>
 								<p>A virtual machine image for use with either Vagrant or Amazon EC2 will be provided
 									which will contain the environment for the course. Data for the course will be
@@ -224,11 +225,71 @@
 								<p>Throughout the course, students will work with source code on a virtual machine/Amazon EC2 image and in github which they can run, tweak and modify to learn. In addition, some portions of the course will include Jupyter or Zeppelin notebooks. There will be an assessment in each section, where the student takes what they've learned and extends an example to do something new.</p>
 							</div>
 						</div>
-						
-						<h3 class="tab_drawer_heading" rel="tab2">Realtime Predictive Analytics</h3>
+
+						<h3 class="tab_drawer_heading" rel="tab2">Introduction to PySpark</h3>
 						<div id="tab2" class="tab_content">
-							<h2>In Progress</h2>
-							<p>Coming soon...</p>
+							<div class="agile-heading">
+								<h3>Introduction to PySpark</h3>
+							</div>
+							<div class="common-box course-length-holder">
+								<h5>Course Length</h5>
+								<p>Three Hours</p>
+							</div>
+							<div class="common-box expected-holder">
+								<h5>Required Enrollment</h5>
+								<p>3 students</p>
+							</div>
+							<div class="common-box course-overview-holder">
+								<h5>Course Overview</h5>
+								<p>This is a three hour professional development class that teaches introductory PySpark.
+									PySpark is the Python interface to Apache Spark, the leading general purpose distributed
+									data processing platform. With PySpark you get the power of Python and the power of Spark, Spark SQL and Spark MLlib.
+									This course will breeze you through installation and setup through the use of a virtual machine
+									with the environment already setup, and get you rapidly productive processing data with PySpark
+									in local mode. No Spark cluster needed!</p>
+								<p>A short theory section introduces the concepts behind Spark. Environment setup is easy
+									with a virtual machine running locally in Vagrant/Virtualbox or on Amazon EC2. Basic PySpark
+									introduces both the RDD and DataFrame APIs and we'll compute the same metric using dataflow
+									programming with RDDs and Spark SQL using DataFrames. Next, we flex our Spark muscles
+									with exploratory data analysis on airline flight delay data. We'll discover how often flights
+									are late, and why.</p>
+								<p>The final section of the course introduces machine learning and predictive analytics with
+									PySpark by creating a classifer model to predict flight delays into one of four categories:
+									Very Early, Early, Late and Very Late. We'll show how to create an experimental setup and determine
+									the performance of our model.</p>
+								<div class="pyramid">
+									<img src="img/pyspark.png" class="img-responsive" alt="PySpark Console" />
+								</div>
+							</div>
+						</div>
+
+						<h3 class="tab_drawer_heading" rel="tab3">Realtime Predictive Analytics</h3>
+						<div id="tab3" class="tab_content">
+							<div class="agile-heading">
+								<h3>Realtime Predictive Analytics</h3>
+							</div>
+							<div class="common-box course-length-holder">
+								<h5>Course Length</h5>
+								<p>Six Hours</p>
+							</div>
+							<div class="common-box expected-holder">
+								<h5>Required Enrollment</h5>
+								<p>3 students</p>
+							</div>
+							<div class="common-box course-overview-holder">
+								<p>The course covers the construction of an entire predictive analytics
+									web application using Python/Flask/JQuery, Kafka, PySpark, Spark MLlib and Spark
+									Streaming. This is similar to chapters 7 and 8 in the book
+									<a href="/book">Agile Data Science 2.0</a> (O'Reilly, 2017).</p>
+								<p>First we go over the architecture used. After project setup using a
+									local virtual machine or Amazon EC2, we use PySpark in batch mode to train a
+									classifier model to predict flight delays in terms of four categories. Next we
+									build a web application front-end to our predictive system, which submit
+									prediction requests to a Kafka queue. Next we use Spark MLLib with Spark
+									Streaming to respond to those prediction requests. Finally, we demonstrate
+									and analyze the entire system together.</p>
+								<p>This course is also available on <a href="/video">video</a>.</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -256,7 +317,7 @@
 					</ul>
 				</div>
 				<div class="foot-copy text-center">
-					<p>&copy; Copyright 2017  Data Syndrome  .<a href="#">Privacy Policy</a> .</p>
+					<p>&copy; Copyright 2017  Data Syndrome · <a href="#">Privacy Policy</a> .</p>
 				</div>
 			</div>
 		</footer>
@@ -265,7 +326,7 @@
         <script type="text/javascript" src="js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="js/custom.js" ></script>
 
-				<!-- Google Analytics -->
+		<!-- Google Analytics -->
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
