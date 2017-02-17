@@ -23,15 +23,10 @@ ul.tabs li {
 }
 .tab_last { border-right: 1px solid #333; }
 
-ul.tabs li:hover {
-	background-color: #ccc;
-	color: #fff;
-}
-
 ul.tabs li.active {
-	background-color: #fff;
+	background-color: #354368;
 	color: #fff;
-	border-bottom: 1px solid #fff;
+	border: 1px solid #354368;
 	display: block;
 }
 
