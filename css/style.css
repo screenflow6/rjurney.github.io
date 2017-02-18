@@ -78,6 +78,7 @@ header .home-form-all .form-in .form-control { background-color: #fff;background
 
 .btn.bottom-video-btn { background-color: #34c6ce;  border-radius: 50px;  color: #fff;  font-size: 20px; font-family:"AvenirNextLTProRegular"; padding: 10px 30px !important;}
 .video-training-holder { box-shadow: 0 3px 5px 0 rgba(221, 221, 221, 1) inset; background: rgba(0, 0, 0, 0) url("../img/body-bg.jpg") no-repeat scroll 0 0 / cover ; padding: 70px 0px 80px;}
+.video-training-holder .main-section .main-contents .video-contents {  float: right;  width: 50%;   padding: 0px 0px 0px 30px;}
 .video-training-holder .main-section .main-contents .top-contents h3 { color: #182752; font-size: 34px; margin-top: 0; font-family:"AvenirNextLTProRegular"; }
 .video-training-holder .main-section .main-contents .top-contents h5 { color: #5fbfc9; font-family: "Open Sans"; font-size: 16px; line-height:1.5;}
 .video-training-holder .main-section .main-contents .top-contents > p { color: #767676; font-family: "Open Sans"; font-size: 16px; line-height: 1.8; padding: 20px 0; text-align:justify; }
@@ -207,6 +208,7 @@ footer .foot-copy p a { margin:0; color:#7d7d7d; font-size:13px; font-family:'Op
 /* video-training */
 .navbar-toggle .icon-bar { background-color:#202020; }
 .video-training-holder { padding: 30px 0; }
+.video-training-holder .main-section .main-contents .video-contents {  float: none;  padding: 0 0 30px;  width: auto;}
 .video-training-holder .main-section .main-contents .top-contents h3 { font-size: 22px;	}
 .video-training-holder .main-section .video-contents { padding-top: 20px; }	
 .video-training-holder .main-section .video-contents .video-frame iframe { height: 100%; width: 100%; }
