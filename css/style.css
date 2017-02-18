@@ -97,9 +97,9 @@ header .home-form-all .form-in .form-control { background-color: #fff;background
 .tab-holder ul.tabs { height: 50px; }
 .tab-holder ul.tabs li { font-size: 22px; color:#fff; height: 50px; padding: 10px 20px; border-radius: 2px; font-family:"AvenirNextLTProRegular"; }
 .tab-holder ul.tabs li.list-1 { margin-left: 0px; }
-.tab-holder ul.tabs li.active::after { background: rgba(0, 0, 0, 0) url("img/list-overlay-1.png") no-repeat scroll center center; content: ""; display: inline-block; height: 16px; left: 0; position: absolute; right: 0; top: 46px; width: 100%; z-index: 100; }
+.tab-holder ul.tabs li.active::after { background: rgba(0, 0, 0, 0) url("../img/list-overlay-1.png") no-repeat scroll center center; content: ""; display: inline-block; height: 16px; left: 0; position: absolute; right: 0; top: 46px; width: 100%; z-index: 100; }
 /*.tab-holder ul.tabs li.list-2 { background-color:#32b3e0; border: 1px solid #32b3e0; margin-left: 10px; }*/
-.tab-holder ul.tabs li::after { background: rgba(0, 0, 0, 0) url("img/list-overlay-2.png") no-repeat scroll center center; content: "";  display: inline-block; height: 16px; left: 0; position: absolute; right: 0; top: 46px; width: 100%; z-index: 100; }*/
+.tab-holder ul.tabs li::after { background: rgba(0, 0, 0, 0) url("../img/list-overlay-2.png") no-repeat scroll center center; content: "";  display: inline-block; height: 16px; left: 0; position: absolute; right: 0; top: 46px; width: 100%; z-index: 100; }*/
 .corporate-holder .tab-holder .agile-heading > h3 { color: #354368; font-size: 24px; font-family:"AvenirNextLTProRegular"; }
 .corporate-holder .tab-holder .common-box { padding-top: 30px; }
 .corporate-holder .tab-holder .common-box.expected-holder,.course-overview-holder { padding-top: 10px !important; }
