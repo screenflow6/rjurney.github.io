@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+
+		<title>Data Syndrome</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- CSS -->
+        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/fonts.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/tab.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/owl.theme.default.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="img/favicon/favicon.png" type="image/png">
+		<link rel="icon" href="img/favicon/favicon.png" type="image/png">
+		<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+		<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+		<script type='text/javascript'>
+		(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FULL_NAME';ftypes[1]='text';fnames[2]='NOTE';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);
+		</script>
+        
+	</head>
+
+    <body>
+		<header>
+			<div class="header-top-all inner">
+				<div class="container">
+					<div class="header-top-content">
+						<div class="row">
+							<div class="col-sm-3 col-xs-8">
+								<div class="logo">
+									<a href="index.html"><img src="img/logo.png" class="img-responsive" alt="Logo"/></a>
+								</div>
+							</div>
+							<div class="col-sm-9">
+								<div class="mainmenu">
+									<nav role="navigation" class="navbar top-navbar">
+										<div class="navbar-header">
+											<button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+												<span class="sr-only">Toggle navigation</span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+										</div>                                                                                                                   
+										<div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+											<ul class="nav navbar-nav navbar-right">
+												<li><a href="index.html">Home</a></li>
+												<li><a href="people.html">People</a></li>
+												<li><a href="book.html">Book</a></li>
+												<li><a href="corporate-training.html">Corporate Training</a></li>
+												<li><a href="video-training.html">video Training</a></li>
+											</ul>
+										</div>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--<div class="home-form-all">
+				<div class="container">
+					<div class="row">
+						<form action="//kontexa.us2.list-manage.com/subscribe/post?u=b0e7b5e284c89542cebce0e69&amp;id=fabe4c1fbf" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+							<div class="col-sm-2">
+								<div class="form-in">
+									<h4>Let's Talk</h4>
+								</div>
+							</div>
+							<div class="col-sm-5ths sp">
+								<div class="form-in">
+									<input type="text" class="form-control" placeholder="Name" value="" name="FULL_NAME" id="mce-FULL_NAME">
+								</div>
+							</div>
+							<div class="col-sm-5ths sp">
+								<div class="form-in">
+									<input type="email" placeholder="Email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" required="required">
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-in">
+									<input type="text" class="form-control" placeholder="Note" value="" name="NOTE" id="mce-NOTE">
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-in">                           
+									<input type="submit" value="Send Now!" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default button">
+								</div>
+							</div>
+							<div id="mce-responses" class="clear">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none"></div>
+							</div> 
+						    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+							<!--<div style="position: absolute; left: -5000px;" aria-hidden="true">
+								<input type="text" name="b_b0e7b5e284c89542cebce0e69_fabe4c1fbf" tabindex="-1" value="">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>-->
+    	</header>
+		
+		<div class="talks-holder">
+			<div class="container">
+				<div class="talks-heading">
+					<h3>Talks</h3>
+				</div>
+				<div class="tab-holder">
+					<ul class="tabs">
+						<li class="active list-1" rel="tab1">Training a Model</li>
+						<li class="list-2" rel="tab2">Building a Web Application</li>
+						<li class="list-3" rel="tab3">Architecture</li>
+					</ul>
+					<div class="tab_container">
+						<h3 class="d_active tab_drawer_heading" rel="tab1">Training a Model</h3>
+						<div id="tab1" class="tab_content">
+						
+							<div class="talks-main-holder">
+								<div class="talks-description-holder">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="talks-contents">
+												<h3>Agile Data Science 2.0</h3>
+												<p>Agile Data Science 2.0 Russell Jurney 2 Data Engineer Data Scientist Visualization Software Engineer 85% 85% 85% Writer 85% Teacher 50% Russell Jurney is a veteran data scientist and thought leader. He coined the term Agile Data Science in the book of that name from O'Reilly in 2012, which outlines the first agile development methodology for data science. </p>
+												<p>Russell has constructed numerous full-stack analytics products over the past ten years and now works with clients helping them extract value from their data assets. Russell Jurney Skill Principal Consultant at Data Syndrome Russell Jurney </p>
+												<!--<div class="talks-button">
+													<a class="btn read-btn" href="#">Read More</a>
+												</div>-->
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="talks-slideshow">
+												<iframe src="http://www.slideshare.net/slideshow/embed_code/key/8jLTIQEPSL2K7J" width="100%" height="390" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe> 		
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="calendar-holder">
+									<div class="calendar-contents">
+										<div class="calendar-heading">
+											<h3>Upcoming Presentations</h3>
+										</div>
+										<div class="calendar-box">
+												<!--<div class="col-sm-12 col-md-3">
+													<div id="extcal_minical">
+														<table cellspacing="1" cellpadding="0" border="0" align="center"><tbody><tr><td>			
+														<table width="100%" cellspacing="0" cellpadding="4" border="0" class="extcal_navbar"><tbody><tr>
+														<td valign="middle" height="18" align="center">
+														<img border="0" title="previous month" alt="Last month" class="mod_events_link" src="img/icons/cal-left-arrow.png" onMouseDown="callNavigation('index.php?option=com_jevents&amp;task=modcal.ajax&amp;day=1&amp;month=9&amp;year=2013&amp;modid=141&amp;tmpl=component');">
+														</td>
+														<td width="75%" valign="middle" nowrap="" height="18" align="center" class="extcal_month_label">
+														<a href="#" style="text-decoration:none;color:inherit;" onClick="window.location.href='/demo/all-events/monthcalendar/2013/10/-';return false;">FEB 2017</a>
+														</td>
+														<td valign="middle" height="18" align="center">
+														<img border="0" title="next month" alt="Next Month" class="mod_events_link" src="img/icons/cal-right-arrow.png" onMouseDown="callNavigation('index.php?option=com_jevents&amp;task=modcal.ajax&amp;day=1&amp;month=11&amp;year=2013&amp;modid=141&amp;tmpl=component');">
+														</td>
+														</tr></tbody></table>
+														<table class="extcal_weekdays">
+														<tbody><tr>
+														<td></td>
+														<td class="extcal_weekdays"><span class="sunday">S</span></td>
+														<td class="extcal_weekdays">M</td>
+														<td class="extcal_weekdays">T</td>
+														<td class="extcal_weekdays">W</td>
+														<td class="extcal_weekdays">T</td>
+														<td class="extcal_weekdays">F</td>
+														<td class="extcal_weekdays"><span class="saturday">S</span></td>
+														</tr>
+														<tr>
+														<td class="extcal_weekcell"><a href="#" onClick="window.location.href='/demo/all-events/eventsbyweek/2013/9/29/-';return false;"></a></td>
+														<td class="extcal_othermonth"></td>
+														<td class="extcal_othermonth"></td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/1/-';return false;">1</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/2/-';return false;">2</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/3/-';return false;">3</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/4/-';return false;">4</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/5/-';return false;">5</a>
+														</td>
+														</tr>
+														<tr>
+														<td class="extcal_weekcell"><a href="#" onClick="window.location.href='/demo/all-events/eventsbyweek/2013/10/6/-';return false;"></a></td>
+														<td class="extcal_sundaycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/6/-';return false;">6</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/7/-';return false;">7</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/8/-';return false;">8</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/9/-';return false;">9</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/10/-';return false;">10</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/11/-';return false;">11</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/12/-';return false;">12</a>
+														</td>
+														</tr>
+														<tr>
+														<td class="extcal_weekcell"><a href="#" onClick="window.location.href='/demo/all-events/eventsbyweek/2013/10/13/-';return false;"></a></td>
+														<td class="extcal_sundaycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/13/-';return false;">13</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/14/-';return false;">14</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/15/-';return false;">15</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/16/-';return false;">16</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/17/-';return false;">17</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/18/-';return false;">18</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/19/-';return false;">19</a>
+														</td>
+														</tr>
+														<tr>
+														<td class="extcal_weekcell"><a href="#" onClick="window.location.href='/demo/all-events/eventsbyweek/2013/10/20/-';return false;"></a></td>
+														<td class="extcal_sundaycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/20/-';return false;">20</a>
+														</td>
+														<td class="extcal_todaycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/21/-';return false;">21</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/22/-';return false;">22</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/23/-';return false;">23</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/24/-';return false;">24</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/25/-';return false;">25</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/26/-';return false;">26</a>
+														</td>
+														</tr>
+														<tr>
+														<td class="extcal_weekcell"><a href="#" onClick="window.location.href='/demo/all-events/eventsbyweek/2013/10/27/-';return false;"></a></td>
+														<td class="extcal_sundaycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/27/-';return false;">27</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/28/-';return false;">28</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/29/-';return false;">29</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/30/-';return false;">30</a>
+														</td>
+														<td class="extcal_daycell">
+														<a href="#" class="extcal_busylink" title="Go to calendar - current day" onClick="window.location.href='/demo/all-events/eventsbyday/2013/10/31/-';return false;">31</a>
+														</td>
+														<td class="extcal_othermonth"></td>
+														<td class="extcal_othermonth"></td>
+														</tr>
+														</tbody></table>
+														</td></tr></tbody></table>
+													</div>
+												</div>-->
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="calendar-table">
+															<table>
+																<thead>
+																	<tr>
+																		<th class="date">DATE</th>
+																		<th>EVENT</th>
+																		<th>TALK TITLE</th>
+																		<th>DESCRIPTION</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr class="active">
+																		<td class="date">15 Feb 2017</td>
+																		<td>Maecenas aliquet</td>
+																		<td>Agile Data Science </td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">16 Feb 2017</td>
+																		<td>Velit vel turpis Mauris neque</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">20 Feb 2017</td>
+																		<td>Petus malesuada nec ultricies sit</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">25 Feb 2017</td>
+																		<td>Smet porttitor mattis enim</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																	<tr>
+																		<td class="date">28 Feb 2017</td>
+																		<td>In massa libero interdum</td>
+																		<td>Agile Data Science</td>
+																		<td>Agile Data Science 2.0 outlines a data science and software methodology.</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="video-holder">
+									<div class="video-heading">
+										<h3>Presentations</h3>
+									</div>
+									<div class="video-box">
+										<div class="row">
+											<div class="col-sm-6 col-md-3">
+												<div class="videos video-1">
+													<iframe src="https://player.vimeo.com/video/202336113" width="100%" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>															                                            	
+												</div>
+											</div>
+											<div class="col-sm-6 col-md-3">
+												<div class="videos video-2">
+													<iframe src="https://player.vimeo.com/video/202336113" width="100%" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>												
+												</div>
+											</div>
+											<div class="col-sm-6 col-md-3">
+												<div class="videos video-3">
+													<iframe src="https://player.vimeo.com/video/202336113" width="100%" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>												
+												</div>
+											</div>
+											<div class="col-sm-6 col-md-3">
+												<div class="videos video-4">
+													<iframe src="https://player.vimeo.com/video/202336113" width="100%" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>												
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						<h3 class="tab_drawer_heading" rel="tab2">Realtime Predictive Analytics</h3>
+						<div id="tab2" class="tab_content">
+							<h2>Tab 2 content</h2>
+							<p>Nunc dui velit, scelerisque eu placerat volutpat, dapibus eu nisi. Vivamus eleifend vestibulum odio non vulputate.</p>
+						</div>
+						<h3 class="tab_drawer_heading" rel="tab3">Architecture</h3>
+						<div id="tab3" class="tab_content">
+							<h2>Tab 3 content</h2>
+							<p>Nunc dui velit, scelerisque eu placerat volutpat, dapibus eu nisi. Vivamus eleifend vestibulum odio non vulputate.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<footer>
+			<div class="container">	
+				<div class="foot-social text-center">
+					<ul class="list-inline">
+						<li><a href="http://facebook.com/jurney"><img src="img/share-1.png" class="img-responsive" target="_blank" /></a></li>
+						<li><a href="http://twitter.com/rjurney"><img src="img/share-2.png" class="img-responsive" target="_blank" /></a></li>
+						<li><a href="http://linkedin.com/in/russelljurney"><img src="img/share-3.png" class="img-responsive"target="_blank" /></a></li>
+						<li><a href="https://medium.com/@rjurney"><img src="img/share-4.png" class="img-responsive" target="_blank" /></a></li>
+						<li><a href="people.html"><img src="img/share-5.png" class="img-responsive" target="_blank"/></a></li>
+					</ul>
+				</div>
+				<div class="foot-menu text-center">
+					<ul class="list-inline">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="people.html">People</a></li>
+						<li><a href="book.html">Book</a></li>
+					</ul>
+				</div>
+				<div class="foot-copy text-center">
+					<p>&copy; Copyright 2017  Data Syndrome  .<a href="#">Privacy Policy</a> .</p>
+				</div>
+			</div>
+		</footer>
+
+        <script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+        <script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/custom.js" ></script>
+		
+
+    </body>
+</html>
