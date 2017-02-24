@@ -258,49 +258,15 @@ header .header-bottom-cbd h3 { font-size: 19px; }
 .talks-holder .talks-contents h3 {	margin-bottom: 20px;}
 .talks-holder .talks-button  {	margin-top: 30px;}
 .talks-holder .talks-button .btn.read-btn {  background-color: #32b3e0;  border-radius: 0;  color: #fff;  font-family: "AvenirNextLTProRegular";  font-size: 22px;}
-.talks-holder .calendar-holder {  background-color: #99dbf4;  padding: 50px 30px;}
-.talks-holder .calendar-holder .calendar-heading h3 {  color: #fff;  font-family: "AvenirNextLTProRegular";  font-size: 32px;  text-align: left;}
+.talks-holder-bottom .calendar-holder {  background-color: #99dbf4;  padding: 50px 30px;}
+.talks-holder-bottom .calendar-holder .calendar-heading h3 {  color: #fff;  font-family: "AvenirNextLTProRegular";  font-size: 32px;  text-align: left;}
 
-.talks-holder .calendar-holder .calendar-box {  padding-top: 30px;}
-.talks-holder .calendar-holder .calendar-table {  height: 400px;  overflow-y: scroll;}
-.talks-holder .calendar-holder .calendar-table tr.active td { color:#0000CC; }
-.talks-holder .calendar-holder .calendar-table td,th {  color: #fff;  font-family: "AvenirNextLTProRegular";  font-size: 16px;  padding: 10px 0px 10px 30px;  border-bottom:1px solid #fff;}
-.talks-holder .calendar-holder .calendar-table td.date,th.date {  font-size: 18px; padding-left:0px !important;}
-.talks-holder .calendar-holder .calendar-table th { color: #192853; }
-.talks-holder .calendar-holder .calendar-box #extcal_minical {  margin-top: 30px;}
+.talks-holder-bottom .calendar-holder .calendar-box {  padding-top: 30px;}
+.talks-holder-bottom .calendar-holder .calendar-table {  height: 400px;  overflow-y: scroll;}
+.talks-holder-bottom .calendar-holder .calendar-table tr.active td { color:#0000CC; }
+.talks-holder-bottom .calendar-holder .calendar-table td,th {  color: #fff;  font-family: "AvenirNextLTProRegular";  font-size: 16px;  padding: 10px 0px 10px 30px;  border-bottom:1px solid #fff;}
+.talks-holder-bottom .calendar-holder .calendar-table td.date,th.date {  font-size: 18px; padding-left:0px !important;}
+.talks-holder-bottom .calendar-holder .calendar-table th { color: #192853; }
+.talks-holder-bottom .calendar-holder .calendar-box #extcal_minical {  margin-top: 30px;}
 .talks-holder .video-holder {  padding: 30px 0;}
 .talks-holder .video-holder .video-box {  padding-top: 20px;}
-#extcal_minical table {  background-color: #eee;  color: #333;  font-family: "Trebuchet MS", Verdana, Arial, sans-serif; }
-#extcal_minical table tr,#extcal_minical table td{	border:none!important;}
-#extcal_minical table tbody {  border: none;  background-color: #fff;}
-#extcal_minical .extcal_navbar {border-bottom: 1px solid #B4B4B6;  background-color: #515151;}
-#extcal_minical .extcal_tiny_add_event_link {	font-size: 12px;	font-weight: normal;	color:#575767;	text-decoration: none;}
-#extcal_minical TABLE.extcal_weekdays {	background-repeat: repeat-x;	border-top: 1px solid #FFFFFF;	width:235px;	border-collapse:collapse;	border-spacing:0px;	border-width:0px;	text-align:center;}
-#extcal_minical TD.extcal_weekdays {	font-size: 12px;	font-weight: normal;	text-decoration: none;	padding-top: 4px;	vertical-align: middle;	height:24px;	text-align:center;    background-color: #2b9bc2;	color:#fff;    }
-
-#extcal_minical .extcal_small {	font-size: 12px;	color:#575767;	text-decoration: none;}
-#extcal_minical .extcal_small:link,#extcal_minical .extcal_small:visited {	text-decoration: none;}
-#extcal_minical .extcal_small:hover {	text-decoration: underline;}
-
-#extcal_minical .extcal_daycell,#extcal_minical .extcal_todaycell,
-#extcal_minical .extcal_sundaycell,#extcal_minical .extcal_othermonth {	font-size: 12px;	font-weight: normal;	font-style: normal;text-decoration: none;	color:#555555;	background-repeat: no-repeat;background-position: center center;  background-color: #eee;}
-
-#extcal_minical .extcal_todaycell {	color:#fff; }
-
-#extcal_minical .extcal_sundaycell {	color:#99AAAA;}
-
-#extcal_minical .extcal_othermonth {	color:#99AAAA;}
-
-#extcal_minical .extcal_daylink, #extcal_minical .extcal_sundaylink,
-#extcal_minical .extcal_busylink  {	font-size: 15px;	font-weight: normal;	font-style: normal;	text-decoration: none; }
-
-#extcal_minical .extcal_daylink:link,#extcal_minical .extcal_daylink:visited {	color:#555555;}
-
-#extcal_minical .extcal_busylink:link,#extcal_minical .extcal_busylink:visited { 	color:#222;	text-decoration: none;   display: block;  background-color: #fff;  padding: 4px 0;}
-#extcal_minical .extcal_todaycell .extcal_busylink,
-#extcal_minical .extcal_todaycell .extcal_busylink:visited{  color:#fff; background-color: #2484b0;}
-#extcal_minical .extcal_sundaylink:link,#extcal_minical .extcal_sundaylink:visited {	color:#99AAAA;}
-
-#extcal_minical .extcal_month_label {  color: #5f5f5f;  font-family: "AvenirNextLTProRegular";  font-size: 17px;  font-weight: 600;  text-transform: uppercase;}
-#extcal_minical .extcal_picture
-#extcal_minical .extcal_weekcell {  margin: 0px;  padding: 0px;  text-align:center;}
